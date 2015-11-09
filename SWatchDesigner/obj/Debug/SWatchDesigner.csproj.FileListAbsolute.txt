@@ -1,0 +1,9 @@
+c:\users\gotoel\documents\visual studio 2012\Projects\SWatchDesigner\SWatchDesigner\bin\Debug\SWatchDesigner.exe.config
+c:\users\gotoel\documents\visual studio 2012\Projects\SWatchDesigner\SWatchDesigner\bin\Debug\SWatchDesigner.exe
+c:\users\gotoel\documents\visual studio 2012\Projects\SWatchDesigner\SWatchDesigner\bin\Debug\SWatchDesigner.pdb
+c:\users\gotoel\documents\visual studio 2012\Projects\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.Properties.Resources.resources
+c:\users\gotoel\documents\visual studio 2012\Projects\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.csproj.GenerateResource.Cache
+c:\users\gotoel\documents\visual studio 2012\Projects\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.exe
+c:\users\gotoel\documents\visual studio 2012\Projects\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.pdb
+C:\Users\gotoel\documents\visual studio 2012\Projects\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.MainForm.resources
+C:\Users\gotoel\documents\visual studio 2012\Projects\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.csprojResolveAssemblyReference.cache
