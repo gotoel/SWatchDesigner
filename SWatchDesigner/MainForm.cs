@@ -16,19 +16,22 @@ namespace SWatchDesigner
         public MainForm()
         {
             InitializeComponent();
+
+            // Add available app names to the ListView.
             String[] apps = { "GPS", "Compass", "Time", "Weight", "Tracker", "Signal", "Weather" };
             foreach (String app in apps)
             {
-                nsListView1.AddItem(app);
-                nsListView2.AddItem(app);
+                appList.AddItem(app);
             }
         }
+
 
         private void nsTheme1_MouseDown(object sender, MouseEventArgs e)
         {
             mouseLocation = new Point(-e.X, -e.Y);
         }
 
+        // Method to allow moving of the window.
         private void nsTheme1_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -36,6 +39,17 @@ namespace SWatchDesigner
                 Point mousePos = Control.MousePosition;
                 mousePos.Offset(mouseLocation.X, mouseLocation.Y);
                 Location = mousePos;
+            }
+        }
+
+        private void nsTabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Check if the "New layout" tab was clicked.
+            if (nsTabControl1.SelectedIndex == nsTabControl1.TabPages.Count-1)
+            {
+                // Display layout naming screen.
+                // CODE GOES HERE
+                nsTabControl1.TabPages.Add("New layout");
             }
         }
 
