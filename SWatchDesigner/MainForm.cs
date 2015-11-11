@@ -18,7 +18,7 @@ namespace SWatchDesigner
             InitializeComponent();
 
             // Add available app names to the ListView.
-            String[] apps = { "GPS", "Compass", "Time", "Weight", "Tracker", "Signal", "Weather" };
+            String[] apps = { "GPS (Lat-Long)", "Compass", "Time", "Trail Tracker", "Signal", "Weather" };
             foreach (String app in apps)
             {
                 appList.AddItem(app);
