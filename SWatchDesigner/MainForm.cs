@@ -48,10 +48,67 @@ namespace SWatchDesigner
             if (nsTabControl1.SelectedIndex == nsTabControl1.TabPages.Count-1)
             {
                 // Display layout naming screen.
-                // CODE GOES HERE
+                NewLayoutDialog newLayoutDialog = new NewLayoutDialog();
+
+   				// Show testDialog as a modal dialog and determine if DialogResult = OK.
+   				if (newLayoutDialog.ShowDialog(this) == DialogResult.OK)
+   				{
+      				// Read the contents of testDialog's TextBox.
+      				//this.txtResult.Text = newLayoutDialog.LayoutNameTxt.Text;
+      				Console.WriteLine("OK");
+   				}
+   				else
+   				{
+      				//this.txtResult.Text = "Cancelled";
+      				Console.WriteLine("Cancelled");
+   				}
+   				newLayoutDialog.Dispose();
+   				Console.WriteLine("Continue");
                 nsTabControl1.TabPages.Add("New layout");
             }
         }
+
+        private void MainForm_Paint(object sender, PaintEventArgs e)
+        {
+            
+        }
+
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+            ResizeRedraw = true;
+            backgroundWorker1.RunWorkerAsync();
+            this.DoubleBuffered = true;
+            
+        }
+
+        private void nsTheme1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                Invalidate();
+                System.Threading.Thread.Sleep(100);
+            }
+           
+        }
+
+        private void panel10_Paint(object sender, PaintEventArgs e)
+        {
+            Console.WriteLine("draw");
+            Pen pen = new System.Drawing.Pen(System.Drawing.Color.Tomato);
+            SolidBrush brush = new System.Drawing.SolidBrush(Color.Blue);
+            Graphics g = e.Graphics;
+            Rectangle app = new Rectangle(0, 0, 200, 200);
+            g.DrawRectangle(pen, app);
+            g.FillRectangle(brush, app);
+        }
+
 
     }
 }

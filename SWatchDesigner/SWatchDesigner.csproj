@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="Apps\TimeApp.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -52,6 +54,12 @@
     </Compile>
     <Compile Include="MonoFlat.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NewLayoutDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewLayoutDialog.Designer.cs">
+      <DependentUpon>NewLayoutDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="NSTheme.cs">
       <SubType>Component</SubType>
@@ -63,6 +71,9 @@
     </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewLayoutDialog.resx">
+      <DependentUpon>NewLayoutDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -86,6 +97,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

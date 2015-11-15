@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.nsTheme1 = new NSTheme();
             this.nsTabControl1 = new NSTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -46,9 +47,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.nsGroupBox8 = new NSGroupBox();
             this.nsTextBox4 = new NSTextBox();
-            this.monoFlat_Label5 = new MonoFlat.MonoFlat_Label();
+            this.custEmergencyLbl = new MonoFlat.MonoFlat_Label();
             this.nsOnOffBox3 = new NSOnOffBox();
-            this.monoFlat_Label6 = new MonoFlat.MonoFlat_Label();
+            this.RFIDLbl = new MonoFlat.MonoFlat_Label();
             this.nsGroupBox9 = new NSGroupBox();
             this.appList = new NSListView();
             this.nsGroupBox10 = new NSGroupBox();
@@ -65,6 +66,7 @@
             this.nsControlButton2 = new NSControlButton();
             this.nsControlButton1 = new NSControlButton();
             this.nsLabel1 = new NSLabel();
+            this.panel10 = new System.Windows.Forms.Panel();
             this.nsTheme1.SuspendLayout();
             this.nsTabControl1.SuspendLayout();
             this.nsGroupBox7.SuspendLayout();
@@ -73,6 +75,10 @@
             this.nsGroupBox9.SuspendLayout();
             this.nsGroupBox10.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // nsTheme1
             // 
@@ -102,6 +108,7 @@
             this.nsTheme1.Text = "nsTheme1";
             this.nsTheme1.TransparencyKey = System.Drawing.Color.Empty;
             this.nsTheme1.Transparent = false;
+            this.nsTheme1.Paint += new System.Windows.Forms.PaintEventHandler(this.nsTheme1_Paint);
             this.nsTheme1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.nsTheme1_MouseDown);
             this.nsTheme1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.nsTheme1_MouseMove);
             // 
@@ -157,6 +164,7 @@
             // 
             // nsGroupBox7
             // 
+            this.nsGroupBox7.Controls.Add(this.panel10);
             this.nsGroupBox7.Controls.Add(this.monoFlat_Panel1);
             this.nsGroupBox7.Controls.Add(this.nsGroupBox8);
             this.nsGroupBox7.Controls.Add(this.nsGroupBox9);
@@ -267,9 +275,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.nsGroupBox8.Controls.Add(this.nsTextBox4);
-            this.nsGroupBox8.Controls.Add(this.monoFlat_Label5);
+            this.nsGroupBox8.Controls.Add(this.custEmergencyLbl);
             this.nsGroupBox8.Controls.Add(this.nsOnOffBox3);
-            this.nsGroupBox8.Controls.Add(this.monoFlat_Label6);
+            this.nsGroupBox8.Controls.Add(this.RFIDLbl);
             this.nsGroupBox8.DrawSeperator = true;
             this.nsGroupBox8.Location = new System.Drawing.Point(23, 317);
             this.nsGroupBox8.Name = "nsGroupBox8";
@@ -293,17 +301,17 @@
             this.nsTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.nsTextBox4.UseSystemPasswordChar = false;
             // 
-            // monoFlat_Label5
+            // custEmergencyLbl
             // 
-            this.monoFlat_Label5.AutoSize = true;
-            this.monoFlat_Label5.BackColor = System.Drawing.Color.Transparent;
-            this.monoFlat_Label5.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.monoFlat_Label5.ForeColor = System.Drawing.Color.White;
-            this.monoFlat_Label5.Location = new System.Drawing.Point(4, 76);
-            this.monoFlat_Label5.Name = "monoFlat_Label5";
-            this.monoFlat_Label5.Size = new System.Drawing.Size(136, 15);
-            this.monoFlat_Label5.TabIndex = 2;
-            this.monoFlat_Label5.Text = "Custom emergency text:";
+            this.custEmergencyLbl.AutoSize = true;
+            this.custEmergencyLbl.BackColor = System.Drawing.Color.Transparent;
+            this.custEmergencyLbl.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.custEmergencyLbl.ForeColor = System.Drawing.Color.White;
+            this.custEmergencyLbl.Location = new System.Drawing.Point(4, 76);
+            this.custEmergencyLbl.Name = "custEmergencyLbl";
+            this.custEmergencyLbl.Size = new System.Drawing.Size(136, 15);
+            this.custEmergencyLbl.TabIndex = 2;
+            this.custEmergencyLbl.Text = "Custom emergency text:";
             // 
             // nsOnOffBox3
             // 
@@ -316,17 +324,17 @@
             this.nsOnOffBox3.TabIndex = 1;
             this.nsOnOffBox3.Text = "nsOnOffBox1";
             // 
-            // monoFlat_Label6
+            // RFIDLbl
             // 
-            this.monoFlat_Label6.AutoSize = true;
-            this.monoFlat_Label6.BackColor = System.Drawing.Color.Transparent;
-            this.monoFlat_Label6.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.monoFlat_Label6.ForeColor = System.Drawing.Color.White;
-            this.monoFlat_Label6.Location = new System.Drawing.Point(4, 49);
-            this.monoFlat_Label6.Name = "monoFlat_Label6";
-            this.monoFlat_Label6.Size = new System.Drawing.Size(71, 15);
-            this.monoFlat_Label6.TabIndex = 0;
-            this.monoFlat_Label6.Text = "RFID toggle:";
+            this.RFIDLbl.AutoSize = true;
+            this.RFIDLbl.BackColor = System.Drawing.Color.Transparent;
+            this.RFIDLbl.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.RFIDLbl.ForeColor = System.Drawing.Color.White;
+            this.RFIDLbl.Location = new System.Drawing.Point(4, 49);
+            this.RFIDLbl.Name = "RFIDLbl";
+            this.RFIDLbl.Size = new System.Drawing.Size(71, 15);
+            this.RFIDLbl.TabIndex = 0;
+            this.RFIDLbl.Text = "RFID toggle:";
             // 
             // nsGroupBox9
             // 
@@ -512,6 +520,14 @@
             this.nsLabel1.Value1 = "S";
             this.nsLabel1.Value2 = "Watch";
             // 
+            // panel10
+            // 
+            this.panel10.Location = new System.Drawing.Point(23, 13);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(300, 300);
+            this.panel10.TabIndex = 7;
+            this.panel10.Paint += new System.Windows.Forms.PaintEventHandler(this.panel10_Paint);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -521,6 +537,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
             this.Text = "Form2";
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
             this.nsTheme1.ResumeLayout(false);
             this.nsTabControl1.ResumeLayout(false);
             this.nsGroupBox7.ResumeLayout(false);
@@ -557,9 +575,9 @@
         private System.Windows.Forms.Panel panel1;
         private NSGroupBox nsGroupBox8;
         private NSTextBox nsTextBox4;
-        private MonoFlat.MonoFlat_Label monoFlat_Label5;
+        private MonoFlat.MonoFlat_Label custEmergencyLbl;
         private NSOnOffBox nsOnOffBox3;
-        private MonoFlat.MonoFlat_Label monoFlat_Label6;
+        private MonoFlat.MonoFlat_Label RFIDLbl;
         private NSGroupBox nsGroupBox9;
         private NSListView appList;
         private NSGroupBox nsGroupBox10;
@@ -572,5 +590,7 @@
         private NSRadioButton nsRadioButton25;
         private NSRadioButton nsRadioButton26;
         private NSRadioButton nsRadioButton27;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Panel panel10;
     }
 }
