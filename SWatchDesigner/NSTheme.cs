@@ -3422,6 +3422,12 @@ class NSListView : Control
 
         base.OnMouseDown(e);
     }
+    public void ClearSelected()
+    {
+        Focus();
+        _SelectedItems.Clear();
+        Invalidate();
+    }
 
     private Pen P1;
     private Pen P2;

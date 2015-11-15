@@ -35,6 +35,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.nsGroupBox7 = new NSGroupBox();
+            this.panel10 = new System.Windows.Forms.Panel();
             this.monoFlat_Panel1 = new MonoFlat.MonoFlat_Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -53,27 +54,16 @@
             this.nsGroupBox9 = new NSGroupBox();
             this.appList = new NSListView();
             this.nsGroupBox10 = new NSGroupBox();
-            this.nsRadioButton19 = new NSRadioButton();
-            this.nsRadioButton20 = new NSRadioButton();
-            this.nsRadioButton21 = new NSRadioButton();
-            this.nsRadioButton22 = new NSRadioButton();
-            this.nsRadioButton23 = new NSRadioButton();
-            this.nsRadioButton24 = new NSRadioButton();
-            this.nsRadioButton25 = new NSRadioButton();
-            this.nsRadioButton26 = new NSRadioButton();
-            this.nsRadioButton27 = new NSRadioButton();
             this.nsControlButton3 = new NSControlButton();
             this.nsControlButton2 = new NSControlButton();
             this.nsControlButton1 = new NSControlButton();
             this.nsLabel1 = new NSLabel();
-            this.panel10 = new System.Windows.Forms.Panel();
             this.nsTheme1.SuspendLayout();
             this.nsTabControl1.SuspendLayout();
             this.nsGroupBox7.SuspendLayout();
             this.monoFlat_Panel1.SuspendLayout();
             this.nsGroupBox8.SuspendLayout();
             this.nsGroupBox9.SuspendLayout();
-            this.nsGroupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
             // backgroundWorker1
@@ -108,7 +98,8 @@
             this.nsTheme1.Text = "nsTheme1";
             this.nsTheme1.TransparencyKey = System.Drawing.Color.Empty;
             this.nsTheme1.Transparent = false;
-            this.nsTheme1.Paint += new System.Windows.Forms.PaintEventHandler(this.nsTheme1_Paint);
+            this.nsTheme1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel10_Paint);
+            this.nsTheme1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nsTheme1_KeyPress);
             this.nsTheme1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.nsTheme1_MouseDown);
             this.nsTheme1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.nsTheme1_MouseMove);
             // 
@@ -177,6 +168,18 @@
             this.nsGroupBox7.TabIndex = 6;
             this.nsGroupBox7.Text = "nsGroupBox7";
             this.nsGroupBox7.Title = "";
+            // 
+            // panel10
+            // 
+            this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel10.Location = new System.Drawing.Point(23, 13);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(300, 300);
+            this.panel10.TabIndex = 7;
+            this.panel10.Paint += new System.Windows.Forms.PaintEventHandler(this.panel10_Paint);
+            this.panel10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel10_MouseDown);
+            this.panel10.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel10_MouseMove);
+            this.panel10.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel10_MouseUp);
             // 
             // monoFlat_Panel1
             // 
@@ -355,7 +358,7 @@
             this.appList.Columns = new NSListView.NSListViewColumnHeader[0];
             this.appList.Items = new NSListView.NSListViewItem[0];
             this.appList.Location = new System.Drawing.Point(3, 42);
-            this.appList.MultiSelect = true;
+            this.appList.MultiSelect = false;
             this.appList.Name = "appList";
             this.appList.Size = new System.Drawing.Size(213, 256);
             this.appList.TabIndex = 0;
@@ -366,108 +369,14 @@
             this.nsGroupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.nsGroupBox10.Controls.Add(this.nsRadioButton19);
-            this.nsGroupBox10.Controls.Add(this.nsRadioButton20);
-            this.nsGroupBox10.Controls.Add(this.nsRadioButton21);
-            this.nsGroupBox10.Controls.Add(this.nsRadioButton22);
-            this.nsGroupBox10.Controls.Add(this.nsRadioButton23);
-            this.nsGroupBox10.Controls.Add(this.nsRadioButton24);
-            this.nsGroupBox10.Controls.Add(this.nsRadioButton25);
-            this.nsGroupBox10.Controls.Add(this.nsRadioButton26);
-            this.nsGroupBox10.Controls.Add(this.nsRadioButton27);
             this.nsGroupBox10.DrawSeperator = true;
             this.nsGroupBox10.Location = new System.Drawing.Point(338, 317);
             this.nsGroupBox10.Name = "nsGroupBox10";
             this.nsGroupBox10.Size = new System.Drawing.Size(227, 146);
-            this.nsGroupBox10.SubTitle = "Select how many tiles an app will take up.";
+            this.nsGroupBox10.SubTitle = "View and change the selected app.";
             this.nsGroupBox10.TabIndex = 22;
             this.nsGroupBox10.Text = "nsGroupBox1";
-            this.nsGroupBox10.Title = "Size selection";
-            // 
-            // nsRadioButton19
-            // 
-            this.nsRadioButton19.Checked = false;
-            this.nsRadioButton19.Location = new System.Drawing.Point(144, 77);
-            this.nsRadioButton19.Name = "nsRadioButton19";
-            this.nsRadioButton19.Size = new System.Drawing.Size(62, 23);
-            this.nsRadioButton19.TabIndex = 8;
-            this.nsRadioButton19.Text = "2x3";
-            // 
-            // nsRadioButton20
-            // 
-            this.nsRadioButton20.Checked = false;
-            this.nsRadioButton20.Location = new System.Drawing.Point(80, 77);
-            this.nsRadioButton20.Name = "nsRadioButton20";
-            this.nsRadioButton20.Size = new System.Drawing.Size(75, 23);
-            this.nsRadioButton20.TabIndex = 7;
-            this.nsRadioButton20.Text = "2x2";
-            // 
-            // nsRadioButton21
-            // 
-            this.nsRadioButton21.Checked = false;
-            this.nsRadioButton21.Location = new System.Drawing.Point(144, 105);
-            this.nsRadioButton21.Name = "nsRadioButton21";
-            this.nsRadioButton21.Size = new System.Drawing.Size(62, 23);
-            this.nsRadioButton21.TabIndex = 6;
-            this.nsRadioButton21.Text = "3x3";
-            // 
-            // nsRadioButton22
-            // 
-            this.nsRadioButton22.Checked = false;
-            this.nsRadioButton22.Location = new System.Drawing.Point(80, 105);
-            this.nsRadioButton22.Name = "nsRadioButton22";
-            this.nsRadioButton22.Size = new System.Drawing.Size(75, 23);
-            this.nsRadioButton22.TabIndex = 5;
-            this.nsRadioButton22.Text = "3x2";
-            // 
-            // nsRadioButton23
-            // 
-            this.nsRadioButton23.Checked = false;
-            this.nsRadioButton23.Enabled = false;
-            this.nsRadioButton23.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nsRadioButton23.Location = new System.Drawing.Point(16, 105);
-            this.nsRadioButton23.Name = "nsRadioButton23";
-            this.nsRadioButton23.Size = new System.Drawing.Size(75, 23);
-            this.nsRadioButton23.TabIndex = 4;
-            this.nsRadioButton23.Text = "3x1";
-            // 
-            // nsRadioButton24
-            // 
-            this.nsRadioButton24.Checked = false;
-            this.nsRadioButton24.Enabled = false;
-            this.nsRadioButton24.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nsRadioButton24.Location = new System.Drawing.Point(16, 76);
-            this.nsRadioButton24.Name = "nsRadioButton24";
-            this.nsRadioButton24.Size = new System.Drawing.Size(75, 23);
-            this.nsRadioButton24.TabIndex = 3;
-            this.nsRadioButton24.Text = "2x1";
-            // 
-            // nsRadioButton25
-            // 
-            this.nsRadioButton25.Checked = false;
-            this.nsRadioButton25.Location = new System.Drawing.Point(144, 47);
-            this.nsRadioButton25.Name = "nsRadioButton25";
-            this.nsRadioButton25.Size = new System.Drawing.Size(62, 23);
-            this.nsRadioButton25.TabIndex = 2;
-            this.nsRadioButton25.Text = "1x1";
-            // 
-            // nsRadioButton26
-            // 
-            this.nsRadioButton26.Checked = false;
-            this.nsRadioButton26.Location = new System.Drawing.Point(80, 47);
-            this.nsRadioButton26.Name = "nsRadioButton26";
-            this.nsRadioButton26.Size = new System.Drawing.Size(75, 23);
-            this.nsRadioButton26.TabIndex = 1;
-            this.nsRadioButton26.Text = "1x1";
-            // 
-            // nsRadioButton27
-            // 
-            this.nsRadioButton27.Checked = false;
-            this.nsRadioButton27.Location = new System.Drawing.Point(16, 47);
-            this.nsRadioButton27.Name = "nsRadioButton27";
-            this.nsRadioButton27.Size = new System.Drawing.Size(75, 23);
-            this.nsRadioButton27.TabIndex = 0;
-            this.nsRadioButton27.Text = "1x1";
+            this.nsGroupBox10.Title = "Selection controls";
             // 
             // nsControlButton3
             // 
@@ -520,14 +429,6 @@
             this.nsLabel1.Value1 = "S";
             this.nsLabel1.Value2 = "Watch";
             // 
-            // panel10
-            // 
-            this.panel10.Location = new System.Drawing.Point(23, 13);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(300, 300);
-            this.panel10.TabIndex = 7;
-            this.panel10.Paint += new System.Windows.Forms.PaintEventHandler(this.panel10_Paint);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -539,6 +440,7 @@
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nsTheme1_KeyPress);
             this.nsTheme1.ResumeLayout(false);
             this.nsTabControl1.ResumeLayout(false);
             this.nsGroupBox7.ResumeLayout(false);
@@ -546,7 +448,6 @@
             this.nsGroupBox8.ResumeLayout(false);
             this.nsGroupBox8.PerformLayout();
             this.nsGroupBox9.ResumeLayout(false);
-            this.nsGroupBox10.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -581,15 +482,6 @@
         private NSGroupBox nsGroupBox9;
         private NSListView appList;
         private NSGroupBox nsGroupBox10;
-        private NSRadioButton nsRadioButton19;
-        private NSRadioButton nsRadioButton20;
-        private NSRadioButton nsRadioButton21;
-        private NSRadioButton nsRadioButton22;
-        private NSRadioButton nsRadioButton23;
-        private NSRadioButton nsRadioButton24;
-        private NSRadioButton nsRadioButton25;
-        private NSRadioButton nsRadioButton26;
-        private NSRadioButton nsRadioButton27;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Panel panel10;
     }
