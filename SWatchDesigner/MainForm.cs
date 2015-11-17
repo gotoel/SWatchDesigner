@@ -34,6 +34,9 @@ namespace SWatchDesigner
         private PosSizableRect nodeSelected = PosSizableRect.None;
         private int angle = 30;
 
+        //tooltips
+        private bool watchScreenTT = false;
+
         int selectedAppIndex = -1;
 
         private enum PosSizableRect
@@ -53,13 +56,20 @@ namespace SWatchDesigner
         public MainForm()
         {
             InitializeComponent();
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
+            nsTheme1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.DoubleBuffered = true;
             // Add available app names to the ListView.
-            String[] apps = { "GPS", "Compass", "Time", "Weight", "Tracker", "Signal", "Weather" };
+            String[] apps = { "GPS", "Compass", "Time", "Weight", "Tracker", "Signal", "Weather", "Calendar" };
+            Array.Sort(apps);
             foreach (String app in apps)
             {
                 appList.AddItem(app);
             }
+
+            ToolTip tip = new ToolTip();
+            tip.ShowAlways = true;
+            tip.Show("My tooltip", panel10, Cursor.Position.X, Cursor.Position.Y);
         }
 
 
@@ -93,16 +103,24 @@ namespace SWatchDesigner
    				{
       				// Read the contents of testDialog's TextBox.
       				//this.txtResult.Text = newLayoutDialog.LayoutNameTxt.Text;
-      				Console.WriteLine("OK");
+                    Console.WriteLine("OK, Layout name: " + newLayoutDialog.LayoutNameTxt.Text);
+                    nsTabControl1.SelectedTab.Text = newLayoutDialog.LayoutNameTxt.Text;
+                    nsTabControl1.TabPages.Add("New layout");
    				}
    				else
    				{
       				//this.txtResult.Text = "Cancelled";
       				Console.WriteLine("Cancelled");
+                    nsTabControl1.SelectedIndex = nsTabControl1.SelectedIndex - 1;
+                    //load previous tab/keep tab loaded
    				}
    				newLayoutDialog.Dispose();
    				Console.WriteLine("Continue");
-                nsTabControl1.TabPages.Add("New layout");
+            }
+            else
+            {
+                //load selected layout
+
             }
         }
 
@@ -142,6 +160,7 @@ namespace SWatchDesigner
             SolidBrush strBrush = new System.Drawing.SolidBrush(Color.Red);
             Pen pen = new System.Drawing.Pen(System.Drawing.Color.Tomato);
             Font font = new Font(new FontFamily("Consolas"), 9.0f);
+
             // draw grid
             int numOfCells = 20;
             int cellSize = 15;
@@ -160,20 +179,13 @@ namespace SWatchDesigner
             if (isDown == true)
             {
                 formGraphics.DrawString("X: " + curX + ", Y: " + curY, font, brush, curX, curY);
-
-                //this.Refresh();
                 Pen drwaPen = new Pen(Color.Navy, 1);
                 int width = curX - initialX, height = curY - initialY;
-                //if (Math.Sign (width) == -1) width = width 
-                //Rectangle rect = new Rectangle(initialPt.X, initialPt.Y, Cursor.Position.X - initialPt.X, Cursor.Position.Y - initialPt.Y);
-                Console.WriteLine((int)Math.Min(curX, initialX) + "   " + (int)Math.Min(curY, initialY) + "   " + (int)Math.Abs(curX - initialX) + "   " + (int)Math.Abs(curY - initialY));
-                Console.WriteLine(this.ToString());
                 Rectangle app = new Rectangle((int)Math.Min(curX, initialX), (int)Math.Min(curY, initialY), (int)Math.Abs(curX - initialX), (int)Math.Abs(curY - initialY));
                 Rectangle appBorder = new Rectangle((int)Math.Min(curX, initialX)-1, (int)Math.Min(curY, initialY)-1, (int)Math.Abs(curX - initialX)+1, (int)Math.Abs(curY - initialY)+1);
                 
                 formGraphics.DrawRectangle(pen, appBorder);
                 formGraphics.FillRectangle(brush, app);
-
             }
             foreach (App a in apps)
             {
@@ -189,6 +201,7 @@ namespace SWatchDesigner
             }
 
             //formGraphics.DrawRectangle(new Pen(Color.Red),rect);
+            Console.WriteLine("APP INDEX: " + selectedAppIndex);
        
            
         }
@@ -273,8 +286,8 @@ namespace SWatchDesigner
 
         private void panel10_MouseUp(object sender, MouseEventArgs e)
         {
-            if ((int)Math.Min(curX, initialX) >= 1 && (int)Math.Abs(curX - initialX) <= panel10.Width - 1 && (int)Math.Abs(curX - initialX) > 30 &&
-                (int)Math.Min(curY, initialY) >= 1 && (int)Math.Abs(curY - initialY) <= panel10.Height - 1 && (int)Math.Abs(curY - initialY) > 30)
+            if ((int)Math.Min(curX, initialX) >= 1 && (int)Math.Abs(curX - initialX) <= panel10.Width - 1  &&
+                (int)Math.Min(curY, initialY) >= 1 && (int)Math.Abs(curY - initialY) <= panel10.Height - 1)
             {
                 Rectangle newRect = new Rectangle((int)Math.Min(curX, initialX), (int)Math.Min(curY, initialY), (int)Math.Abs(curX - initialX), (int)Math.Abs(curY - initialY));
                 Boolean intersects = false;
@@ -287,30 +300,54 @@ namespace SWatchDesigner
                     App newApp = new App((int)Math.Min(curX, initialX), (int)Math.Min(curY, initialY), (int)Math.Abs(curX - initialX), (int)Math.Abs(curY - initialY), panel10);
                     apps.Add(newApp);
                     curX = 0; curY = 0; initialX = 0; initialY = 0;
+                    selectedAppIndex++;
                 }
             }
-            selectedAppIndex++;
             isDown = false;
             this.Refresh();
 
             appList.ClearSelected();
         }
 
-        private void nsTheme1_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            Console.WriteLine("KEY PRESSED: " + e.KeyChar);
-            if (e.KeyChar == 'z')
+            Console.WriteLine("KEY PRESSED: " + e.KeyCode);
+            if (e.KeyCode == Keys.Z)
             {
                 Console.WriteLine("Z PRESSED");
                 apps.RemoveAt(apps.Count - 1);
                 this.Refresh();
             }
-
         }
         //RESIZING CODE
 
 
         public List<App> getApps() { return apps; }
+
+        private void nsButton1_Click(object sender, EventArgs e)
+        {
+            if (selectedAppIndex > -1 && apps.Count() > 0)
+            {
+                apps[selectedAppIndex].delete();
+                apps[selectedAppIndex] = null;
+                apps.RemoveAt(selectedAppIndex);
+                selectedAppIndex = -1;
+                this.Refresh();
+            }
+        }
+
+        private void panel10_MouseHover(object sender, EventArgs e)
+        {
+            if (!watchScreenTT)
+            {
+                ToolTip tip = new ToolTip();
+                //tip.ShowAlways = true;
+                tip.Show("This is the watch window!\nClick and drag to create an app space.", panel10, panel10.Location, 3000);
+                watchScreenTT = true;
+            }
+        }
+
 
     }
 }

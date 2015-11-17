@@ -45,6 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Apps\CompassApp.cs" />
+    <Compile Include="Apps\TrackerApp.cs" />
+    <Compile Include="Apps\CalendarApp.cs" />
+    <Compile Include="Apps\SignalApp.cs" />
+    <Compile Include="Apps\WeatherApp.cs" />
+    <Compile Include="Apps\WeightApp.cs" />
+    <Compile Include="Apps\GPSApp.cs" />
     <Compile Include="Apps\TimeApp.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

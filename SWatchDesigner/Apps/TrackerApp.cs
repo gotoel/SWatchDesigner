@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace SWatchDesigner.Apps
 {
-    class TimeApp : App
+    class TrackerApp : App
     {
         public const int minWidth = 0;
         public const int minHeight = 0;
-        public TimeApp(int x, int y, int height, int width, PictureBox p) : base(x, y, height, width, p, minWidth, minHeight)
+        public TrackerApp(int x, int y, int height, int width, PictureBox p) : base(x, y, height, width, p, minWidth, minHeight)
         {
             
         }

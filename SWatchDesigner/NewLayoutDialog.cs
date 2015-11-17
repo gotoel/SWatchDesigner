@@ -31,8 +31,16 @@ namespace SWatchDesigner
 		
 		void OkBtnClick(object sender, EventArgs e)
 		{
-			this.DialogResult = DialogResult.OK;
-			this.Close();
+            if (!string.IsNullOrWhiteSpace(LayoutNameTxt.Text.Trim()))
+            {
+                LayoutNameTxt.Text = LayoutNameTxt.Text.Replace(" ","");
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                errorLabel.Visible = true;
+            }
 		}
 		
 		void NsControlButton1Click(object sender, EventArgs e)

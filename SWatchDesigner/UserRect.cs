@@ -57,7 +57,9 @@ namespace SWatchDesigner
 
         private void panel_Paint(object sender, PaintEventArgs e)
         {
-            
+
+            if (parentApp == null)
+                ((IDisposable)this).Dispose();
             try
             {
                 Draw(e.Graphics);
@@ -99,11 +101,13 @@ namespace SWatchDesigner
             }
 
             Rectangle backupRect = rect;
-            int panelOffset = 1; 
+            int panelOffset = 2;
+            int panelMin = 1;
             switch (nodeSelected)
             {
                 case PosSizableRect.LeftUp:
-                    rect.X += e.X - oldX;
+                    if ((rect.X + (e.X - oldX)) > panelMin)
+                        rect.X += e.X - oldX;
                     if ((e.X - oldX) < panel.Width - panelOffset)
                         rect.Width -= e.X - oldX;                    
                     rect.Y += e.Y - oldY;
@@ -111,42 +115,46 @@ namespace SWatchDesigner
                         rect.Height -= e.Y - oldY;
                     break;
                 case PosSizableRect.LeftMiddle:
-                    rect.X += e.X - oldX;
+                    if ((rect.X + (e.X - oldX)) > panelMin)
+                        rect.X += e.X - oldX;
                     if ((e.X - oldX) < panel.Width - panelOffset)
                         rect.Width -= e.X - oldX;
                     break;
                 case PosSizableRect.LeftBottom:
                     if ((e.X - oldX) < panel.Width - panelOffset)
                         rect.Width -= e.X - oldX;
-                    rect.X += e.X - oldX;
-                    if ((e.Y - oldY) < panel.Height - panelOffset) 
+                    if ((rect.X + (e.X - oldX)) > panelMin)
+                        rect.X += e.X - oldX;
+                    if (rect.Y + rect.Height + (e.Y - oldY) < panel.Height - panelOffset) 
                         rect.Height += e.Y - oldY;
                     break;
                 case PosSizableRect.BottomMiddle:
-                    if ((e.Y - oldY) < panel.Height - panelOffset) 
+                    if (rect.Y + rect.Height + (e.Y - oldY) < panel.Height - panelOffset) 
                         rect.Height += e.Y - oldY;
                     break;
                 case PosSizableRect.RightUp:
-                    if ((e.X - oldX) < panel.Width - panelOffset)
+                    if (rect.X + rect.Width + (e.X - oldX) < panel.Width - panelOffset)
                         rect.Width += e.X - oldX;
                     rect.Y += e.Y - oldY;
-                    if ((e.Y - oldY) < panel.Height - panelOffset) 
+                    if (rect.Height - (e.Y - oldY) < panel.Height - panelOffset) 
                         rect.Height -= e.Y - oldY;
                     break;
                 case PosSizableRect.RightBottom:
-                    if ((e.X - oldX) < panel.Width - panelOffset)
+                    if (rect.X + rect.Width + (e.X - oldX) < panel.Width - panelOffset)
                         rect.Width +=  e.X - oldX;
-                    if ((e.Y - oldY) < panel.Height - panelOffset) 
+                    if (rect.Y + rect.Height + (e.Y - oldY) < panel.Height - panelOffset) 
                         rect.Height += e.Y - oldY;
                     break;
                 case PosSizableRect.RightMiddle:
-                    if ((e.X - oldX) < panel.Width - panelOffset)
+                    if (rect.X + rect.Width + (e.X - oldX) < panel.Width - panelOffset)
                         rect.Width += e.X - oldX;
                     break;
 
                 case PosSizableRect.UpMiddle:
-                    rect.Y += e.Y - oldY;
-                    rect.Height -= e.Y - oldY;
+                    if (rect.Y + (e.Y - oldY) < panel.Height - panelOffset) 
+                        rect.Y += e.Y - oldY;
+                    if (rect.Height-(e.Y - oldY) < panel.Height - panelOffset)
+                        rect.Height -= e.Y - oldY;
                     break;
 
                 default:
@@ -312,6 +320,14 @@ namespace SWatchDesigner
         public Rectangle getRect()
         {
             return rect;
+        }
+
+        public void delete()
+        {
+            panel.MouseDown -= new MouseEventHandler(panel_MouseDown);
+            panel.MouseUp -= new MouseEventHandler(panel_MouseUp);
+            panel.MouseMove -= new MouseEventHandler(panel_MouseMove);
+            panel.Paint -= new PaintEventHandler(panel_Paint);
         }
     }
 }

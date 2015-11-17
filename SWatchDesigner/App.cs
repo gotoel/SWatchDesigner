@@ -10,7 +10,7 @@ namespace SWatchDesigner
 {
     public class App
     {
-        private int x, y;
+        private int x, y, minWidth, minHeight;
         private int height, width;
         private int mode;
         private UserRect rect;
@@ -26,6 +26,17 @@ namespace SWatchDesigner
             this.parentPanel = p;
         }
 
+        public App(int x, int y, int width, int height, PictureBox p, int minWidth, int minHeight)
+        {
+            this.isSelected = false;
+            this.rect = new UserRect(new Rectangle(x, y, width, height));
+            this.rect.SetPictureBox(p);
+            this.rect.SetApp(this);
+            this.parentPanel = p;
+            this.minWidth = minWidth;
+            this.minHeight = minHeight;
+        }
+
         public void setX(int x) { this.x = x; }
         public void setY(int y) { this.y = y; }
         public void setWidth(int width) { this.width = width; }
@@ -35,6 +46,8 @@ namespace SWatchDesigner
         public int getY() { return rect.getRect().Y; }
         public int getWidth() { return rect.getRect().Width; }
         public int getHeight() { return rect.getRect().Height; }
+        public int getMinWidth() { return minWidth; }
+        public int getMinHeight() { return minHeight; }
         public Rectangle getRect() { return rect.getRect();  }
 
         public void reset(int x, int y, int width, int height)
@@ -58,6 +71,12 @@ namespace SWatchDesigner
                     otherApps.Add(a);
             }
             return otherApps;
+        }
+
+        public void delete()
+        {
+            rect.delete();
+            rect = null;
         }
     }
 }
