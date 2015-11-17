@@ -23,12 +23,33 @@ namespace SWatchDesigner
         int curX, curY;
 
         //RESIZING CODE
-        private Rectangle areaRect;
-        private Rectangle oldRect;
-        private int dragHandle = 0;
-        private Point dragPoint;
+        public Rectangle rect;
+        public bool allowDeformingDuringMovement=false ;
+        private bool mIsClick=false;
+        private bool mMove=false;        
+        private int oldX;
+        private int oldY;
+        private int sizeNodeRect= 5;
+        private Bitmap mBmp=null;
+        private PosSizableRect nodeSelected = PosSizableRect.None;
+        private int angle = 30;
 
         int selectedAppIndex = -1;
+
+        private enum PosSizableRect
+        {            
+            UpMiddle,
+            LeftMiddle,
+            LeftBottom,
+            LeftUp,
+            RightUp,
+            RightMiddle,
+            RightBottom,
+            BottomMiddle,
+            None
+
+        };
+
         public MainForm()
         {
             InitializeComponent();
@@ -159,11 +180,8 @@ namespace SWatchDesigner
                 formGraphics.DrawString(info, font, strBrush, a.Center().X - TextRenderer.MeasureText(info,font, proposedSize).Width/2, a.Center().Y);
             }
 
-            e.Graphics.DrawRectangle(Pens.Red, areaRect);
-            for (int i = 1; i < 9; i++)
-            {
-                e.Graphics.FillRectangle(Brushes.DarkRed, GetHandleRect(i));
-            }
+            formGraphics.DrawRectangle(new Pen(Color.Red),rect);
+       
            
         }
 
@@ -180,9 +198,13 @@ namespace SWatchDesigner
                 if (app.getRect().Contains(point))
                 {
                     clickedOnRect = true;
-                    areaRect = app.getRect();
+                    rect = app.getRect();
+                    mIsClick = false;
                     selectedAppIndex = apps.IndexOf(app);
+                    app.isSelected = true;
                 }
+                else
+                    app.isSelected = false;
             }
             if (!clickedOnRect)
             {
@@ -201,15 +223,7 @@ namespace SWatchDesigner
             else
             {
                 //RESIZE CODE
-                for (int i = 1; i < 9; i++)
-                {
-                    if (GetHandleRect(i).Contains(point))
-                    {
-                        dragHandle = i;
-                        oldRect = areaRect;
-                        dragPoint = GetHandlePoint(i);
-                    }
-                }
+
             }
         }
 
@@ -243,86 +257,8 @@ namespace SWatchDesigner
                 }
                 else
                 {
-                    // Where I started - where I stopped
-                    int x_diff = dragPoint.X - point.X;
-                    int y_diff = dragPoint.Y - point.Y;
 
-                    // Minimum values
-                    int small_offset = 5;
-                    int left = small_offset;
-                    int top = small_offset;
-                    int width = small_offset;
-                    int height = small_offset;
-
-                    // Max values
-                    int max_width = panel10.Width-1;
-                    int max_height = panel10.Height-1;
-
-                    if (dragHandle == 1)
-                    {
-                        left = Math.Max(oldRect.Left - x_diff, left);
-                        top = Math.Max(oldRect.Top - y_diff, top);
-                        width = Math.Min(Math.Max(oldRect.Width + x_diff, width), max_width - left - small_offset);
-                        height = Math.Min(Math.Max(oldRect.Height + y_diff, height), max_height - top - small_offset);
-                    }
-                    else if (dragHandle == 2)
-                    {
-                        left = Math.Max(oldRect.Left - x_diff, left);
-                        top = oldRect.Top;
-                        width = Math.Min(Math.Max(oldRect.Width + x_diff, width), max_width - left - small_offset);
-                        height = oldRect.Height;
-                    }
-                    else if (dragHandle == 3)
-                    {
-                        left = Math.Max(oldRect.Left - x_diff, left);
-                        top = oldRect.Top;
-                        width = Math.Min(Math.Max(oldRect.Width + x_diff, width), max_width - left - small_offset);
-                        height = Math.Min(Math.Max(oldRect.Height - y_diff, height), max_height - top - small_offset);
-                    }
-                    else if (dragHandle == 4)
-                    {
-                        left = oldRect.Left;
-                        top = Math.Max(oldRect.Top - y_diff, top);
-                        width = oldRect.Width;
-                        height = Math.Min(Math.Max(oldRect.Height + y_diff, height), max_height - top - small_offset);
-                    }
-                    else if (dragHandle == 5)
-                    {
-                        left = oldRect.Left;
-                        top = oldRect.Top;
-                        width = oldRect.Width;
-                        height = Math.Min(Math.Max(oldRect.Height - y_diff, height), max_height - top - small_offset);
-                    }
-                    else if (dragHandle == 6)
-                    {
-                        left = oldRect.Left;
-                        top = Math.Max(oldRect.Top - y_diff, top);
-                        width = Math.Min(Math.Max(oldRect.Width - x_diff, width), max_width - left - small_offset);
-                        height = Math.Min(Math.Max(oldRect.Height + y_diff, height), max_height - top - small_offset);
-                    }
-                    else if (dragHandle == 7)
-                    {
-                        left = oldRect.Left;
-                        top = oldRect.Top;
-                        width = Math.Min(Math.Max(oldRect.Width - x_diff, width), max_width - left - small_offset);
-                        height = oldRect.Height;
-
-                    }
-                    else if (dragHandle == 8)
-                    {
-                        left = oldRect.Left;
-                        top = oldRect.Top;
-                        width = Math.Min(Math.Max(oldRect.Width - x_diff, width), max_width - left - small_offset);
-                        height = Math.Min(Math.Max(oldRect.Height - y_diff, height), max_height - top - small_offset);
-                    }
-
-
-                    if (dragHandle > 0)
-                    {
-                        areaRect = new Rectangle(left, top, width, height);
-                        apps[selectedAppIndex].reset(left, top, width, height);
-                        this.Refresh();
-                    }
+                    this.Refresh();
                 }
             }
         }
@@ -340,8 +276,9 @@ namespace SWatchDesigner
                         intersects = true;
                 }
                 if(!intersects) {
-                    App newApp = new App((int)Math.Min(curX, initialX), (int)Math.Min(curY, initialY), (int)Math.Abs(curX - initialX), (int)Math.Abs(curY - initialY));
+                    App newApp = new App((int)Math.Min(curX, initialX), (int)Math.Min(curY, initialY), (int)Math.Abs(curX - initialX), (int)Math.Abs(curY - initialY), panel10);
                     apps.Add(newApp);
+                    curX = 0; curY = 0; initialX = 0; initialY = 0;
                 }
             }
             selectedAppIndex++;
@@ -349,7 +286,6 @@ namespace SWatchDesigner
             this.Refresh();
 
             appList.ClearSelected();
-            dragHandle = 0;
         }
 
         private void nsTheme1_KeyPress(object sender, KeyPressEventArgs e)
@@ -364,35 +300,9 @@ namespace SWatchDesigner
 
         }
         //RESIZING CODE
-        private Point GetHandlePoint(int value)
-        {
-            Point result = Point.Empty;
 
-            if (value == 1)
-                result = new Point(areaRect.Left, areaRect.Top);
-            else if (value == 2)
-                result = new Point(areaRect.Left, areaRect.Top + (areaRect.Height / 2));
-            else if (value == 3)
-                result = new Point(areaRect.Left, areaRect.Bottom);
-            else if (value == 4)
-                result = new Point(areaRect.Left + (areaRect.Width / 2), areaRect.Top);
-            else if (value == 5)
-                result = new Point(areaRect.Left + (areaRect.Width / 2), areaRect.Bottom);
-            else if (value == 6)
-                result = new Point(areaRect.Right, areaRect.Top);
-            else if (value == 7)
-                result = new Point(areaRect.Right, areaRect.Top + (areaRect.Height / 2));
-            else if (value == 8)
-                result = new Point(areaRect.Right, areaRect.Bottom);
 
-            return result;
-        }
+        public List<App> getApps() { return apps; }
 
-        private Rectangle GetHandleRect(int value)
-        {
-            Point p = GetHandlePoint(value);
-            p.Offset(-3, -3);
-            return new Rectangle(p, new Size(5, 5));
-        }
     }
 }

@@ -35,17 +35,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.nsGroupBox7 = new NSGroupBox();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.monoFlat_Panel1 = new MonoFlat.MonoFlat_Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.PictureBox();
             this.nsGroupBox8 = new NSGroupBox();
             this.nsTextBox4 = new NSTextBox();
             this.custEmergencyLbl = new MonoFlat.MonoFlat_Label();
@@ -61,7 +51,7 @@
             this.nsTheme1.SuspendLayout();
             this.nsTabControl1.SuspendLayout();
             this.nsGroupBox7.SuspendLayout();
-            this.monoFlat_Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panel10)).BeginInit();
             this.nsGroupBox8.SuspendLayout();
             this.nsGroupBox9.SuspendLayout();
             this.SuspendLayout();
@@ -156,7 +146,6 @@
             // nsGroupBox7
             // 
             this.nsGroupBox7.Controls.Add(this.panel10);
-            this.nsGroupBox7.Controls.Add(this.monoFlat_Panel1);
             this.nsGroupBox7.Controls.Add(this.nsGroupBox8);
             this.nsGroupBox7.Controls.Add(this.nsGroupBox9);
             this.nsGroupBox7.Controls.Add(this.nsGroupBox10);
@@ -172,105 +161,15 @@
             // panel10
             // 
             this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel10.Location = new System.Drawing.Point(23, 13);
+            this.panel10.Location = new System.Drawing.Point(23, 12);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(300, 300);
-            this.panel10.TabIndex = 7;
+            this.panel10.Size = new System.Drawing.Size(302, 302);
+            this.panel10.TabIndex = 25;
+            this.panel10.TabStop = false;
             this.panel10.Paint += new System.Windows.Forms.PaintEventHandler(this.panel10_Paint);
             this.panel10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel10_MouseDown);
             this.panel10.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel10_MouseMove);
             this.panel10.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel10_MouseUp);
-            // 
-            // monoFlat_Panel1
-            // 
-            this.monoFlat_Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
-            this.monoFlat_Panel1.Controls.Add(this.panel7);
-            this.monoFlat_Panel1.Controls.Add(this.panel4);
-            this.monoFlat_Panel1.Controls.Add(this.panel9);
-            this.monoFlat_Panel1.Controls.Add(this.panel3);
-            this.monoFlat_Panel1.Controls.Add(this.panel8);
-            this.monoFlat_Panel1.Controls.Add(this.panel5);
-            this.monoFlat_Panel1.Controls.Add(this.panel6);
-            this.monoFlat_Panel1.Controls.Add(this.panel2);
-            this.monoFlat_Panel1.Controls.Add(this.panel1);
-            this.monoFlat_Panel1.Location = new System.Drawing.Point(23, 13);
-            this.monoFlat_Panel1.Name = "monoFlat_Panel1";
-            this.monoFlat_Panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.monoFlat_Panel1.Size = new System.Drawing.Size(300, 300);
-            this.monoFlat_Panel1.TabIndex = 19;
-            this.monoFlat_Panel1.Text = "monoFlat_Panel1";
-            // 
-            // panel7
-            // 
-            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel7.Location = new System.Drawing.Point(200, 200);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(100, 100);
-            this.panel7.TabIndex = 5;
-            // 
-            // panel4
-            // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Location = new System.Drawing.Point(200, 100);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(100, 100);
-            this.panel4.TabIndex = 5;
-            // 
-            // panel9
-            // 
-            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel9.Location = new System.Drawing.Point(0, 200);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(100, 100);
-            this.panel9.TabIndex = 3;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Location = new System.Drawing.Point(200, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(100, 100);
-            this.panel3.TabIndex = 2;
-            // 
-            // panel8
-            // 
-            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel8.Location = new System.Drawing.Point(100, 200);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(100, 100);
-            this.panel8.TabIndex = 4;
-            // 
-            // panel5
-            // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Location = new System.Drawing.Point(100, 100);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(100, 100);
-            this.panel5.TabIndex = 4;
-            // 
-            // panel6
-            // 
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Location = new System.Drawing.Point(0, 100);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(100, 100);
-            this.panel6.TabIndex = 3;
-            // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Location = new System.Drawing.Point(100, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(100, 100);
-            this.panel2.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(100, 100);
-            this.panel1.TabIndex = 0;
             // 
             // nsGroupBox8
             // 
@@ -284,7 +183,7 @@
             this.nsGroupBox8.DrawSeperator = true;
             this.nsGroupBox8.Location = new System.Drawing.Point(23, 317);
             this.nsGroupBox8.Name = "nsGroupBox8";
-            this.nsGroupBox8.Size = new System.Drawing.Size(305, 146);
+            this.nsGroupBox8.Size = new System.Drawing.Size(302, 146);
             this.nsGroupBox8.SubTitle = "Miscellaneous settings.";
             this.nsGroupBox8.TabIndex = 24;
             this.nsGroupBox8.Text = "nsGroupBox3";
@@ -444,7 +343,7 @@
             this.nsTheme1.ResumeLayout(false);
             this.nsTabControl1.ResumeLayout(false);
             this.nsGroupBox7.ResumeLayout(false);
-            this.monoFlat_Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panel10)).EndInit();
             this.nsGroupBox8.ResumeLayout(false);
             this.nsGroupBox8.PerformLayout();
             this.nsGroupBox9.ResumeLayout(false);
@@ -464,16 +363,6 @@
         private NSControlButton nsControlButton1;
         private NSLabel nsLabel1;
         private NSGroupBox nsGroupBox7;
-        private MonoFlat.MonoFlat_Panel monoFlat_Panel1;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel1;
         private NSGroupBox nsGroupBox8;
         private NSTextBox nsTextBox4;
         private MonoFlat.MonoFlat_Label custEmergencyLbl;
@@ -483,6 +372,6 @@
         private NSListView appList;
         private NSGroupBox nsGroupBox10;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.PictureBox panel10;
     }
 }
