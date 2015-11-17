@@ -18,7 +18,7 @@ namespace SWatchDesigner
                                         "W159°41'27.48\n" +
                                         "Alt: 141 ft\n" +
                                         "Sat: 6/12";
-        public GPSApp(int x, int y, int height, int width, PictureBox p) : base(x, y, height, width, p, MIN_WIDTH, MIN_HEIGHT, APP_NAME)
+        public GPSApp(int x, int y, int height, int width, PictureBox p) : base(x, y, height, width, p, MIN_WIDTH, MIN_HEIGHT, APP_NAME, APP_DATA)
         {
             
         }

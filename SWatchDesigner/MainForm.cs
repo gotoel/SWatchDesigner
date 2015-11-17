@@ -91,10 +91,28 @@ namespace SWatchDesigner
                         switch (data[4].Replace("\"", ""))
                         {
                             case "GPS":
-                                apps.Add(new GPSApp(x, y,width, height, panel10));
+                                apps.Add(new GPSApp(x, y, width, height, panel10));
                                 break;
                             case "COMPASS":
-                                Console.WriteLine("Case 2");
+                                apps.Add(new CompassApp(x, y, width, height, panel10));
+                                break;
+                            case "TIME":
+                                apps.Add(new TimeApp(x, y, width, height, panel10));
+                                break;
+                            case "WEIGHT":
+                                apps.Add(new WeightApp(x, y, width, height, panel10));
+                                break;
+                            case "TRACKER":
+                                apps.Add(new TrackerApp(x, y, width, height, panel10));
+                                break;
+                            case "SIGNAL":
+                                apps.Add(new SignalApp(x, y, width, height, panel10));
+                                break;
+                            case "WEATHER":
+                                apps.Add(new WeatherApp(x, y, width, height, panel10));
+                                break;
+                            case "CALENDAR":
+                                apps.Add(new CalendarApp(x, y, width, height, panel10));
                                 break;
                             default:
                                 Console.WriteLine("Default case");
