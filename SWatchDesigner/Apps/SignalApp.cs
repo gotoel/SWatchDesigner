@@ -9,9 +9,10 @@ namespace SWatchDesigner.Apps
 {
     class SignalApp : App
     {
-        public const int minWidth = 0;
-        public const int minHeight = 0;
-        public SignalApp(int x, int y, int height, int width, PictureBox p) : base(x, y, height, width, p, minWidth, minHeight)
+        public const int MIN_WIDTH = 0;
+        public const int MIN_HEIGHT = 0;
+        public const string APP_NAME = "SIGNAL";
+        public SignalApp(int x, int y, int height, int width, PictureBox p) : base(x, y, height, width, p, MIN_WIDTH, MIN_HEIGHT, APP_NAME)
         {
             
         }

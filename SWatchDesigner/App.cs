@@ -16,6 +16,8 @@ namespace SWatchDesigner
         private UserRect rect;
         private PictureBox parentPanel;
         public Boolean isSelected;
+        private string appName;
+        private string appData;
 
         public App(int x, int y, int width, int height, PictureBox p)
         {
@@ -26,7 +28,7 @@ namespace SWatchDesigner
             this.parentPanel = p;
         }
 
-        public App(int x, int y, int width, int height, PictureBox p, int minWidth, int minHeight)
+        public App(int x, int y, int width, int height, PictureBox p, int minWidth, int minHeight, string appName, string appData)
         {
             this.isSelected = false;
             this.rect = new UserRect(new Rectangle(x, y, width, height));
@@ -35,6 +37,7 @@ namespace SWatchDesigner
             this.parentPanel = p;
             this.minWidth = minWidth;
             this.minHeight = minHeight;
+            this.appName = appName;
         }
 
         public void setX(int x) { this.x = x; }
@@ -49,6 +52,8 @@ namespace SWatchDesigner
         public int getMinWidth() { return minWidth; }
         public int getMinHeight() { return minHeight; }
         public Rectangle getRect() { return rect.getRect();  }
+        public string getName() { return appName; }
+        public string getData() { return appData; }
 
         public void reset(int x, int y, int width, int height)
         {

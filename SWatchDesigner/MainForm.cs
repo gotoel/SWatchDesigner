@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
+using System.IO;
 
 namespace SWatchDesigner
 {
@@ -67,11 +68,46 @@ namespace SWatchDesigner
                 appList.AddItem(app);
             }
 
-            ToolTip tip = new ToolTip();
-            tip.ShowAlways = true;
-            tip.Show("My tooltip", panel10, Cursor.Position.X, Cursor.Position.Y);
+            loadLayout("testTemplate");
         }
 
+        private void loadLayout(String layoutName)
+        {
+            String appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            StreamReader reader = File.OpenText(appdata + "\\.SWatch\\Templates\\" + layoutName + ".txt");
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                string[] items = line.Split('|');
+                // Now let's find the path.
+                foreach(string appSplit in items)
+                {
+                    if (!String.IsNullOrWhiteSpace(appSplit))
+                    {
+                        Console.WriteLine("APPSPLIT: " + appSplit);
+                        string[] data = appSplit.Split(',');
+                        int x = Int32.Parse(data[0]); int y = Int32.Parse(data[1]);
+                        int width = Int32.Parse(data[2]); int height = Int32.Parse(data[3]);
+                        switch (data[4].Replace("\"", ""))
+                        {
+                            case "GPS":
+                                apps.Add(new GPSApp(x, y,width, height, panel10));
+                                break;
+                            case "COMPASS":
+                                Console.WriteLine("Case 2");
+                                break;
+                            default:
+                                Console.WriteLine("Default case");
+                                break;
+                        }
+                    }
+                }
+
+                // At this point, `myInteger` and `path` contain the values we want
+                // for the current line. We can then store those values or print them,
+                // or anything else we like.
+            }
+        }
 
         private void nsTheme1_MouseDown(object sender, MouseEventArgs e)
         {

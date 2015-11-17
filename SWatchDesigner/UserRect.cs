@@ -55,6 +55,21 @@ namespace SWatchDesigner
             }      
         }
 
+        //This function checks the room size and your text and appropriate font for your text to fit in room
+        //PreferedFont is the Font that you wish to apply
+        //Room is your space in which your text should be in.
+        //LongString is the string which it's bounds is more than room bounds.
+        private Font FindFont(System.Drawing.Graphics g, string longString, Size Room, Font PreferedFont)
+        {
+            //you should perform some scale functions!!!
+            SizeF RealSize = g.MeasureString(longString, PreferedFont);
+            float HeightScaleRatio = Room.Height / RealSize.Height;
+            float WidthScaleRatio = Room.Width / RealSize.Width;
+            float ScaleRatio = (HeightScaleRatio < WidthScaleRatio) ? ScaleRatio = HeightScaleRatio : ScaleRatio = WidthScaleRatio;
+            float ScaleFontSize = PreferedFont.Size * ScaleRatio;
+            return new Font(PreferedFont.FontFamily, ScaleFontSize);
+        }
+
         private void panel_Paint(object sender, PaintEventArgs e)
         {
 

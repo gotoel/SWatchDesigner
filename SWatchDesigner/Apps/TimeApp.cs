@@ -9,9 +9,10 @@ namespace SWatchDesigner.Apps
 {
     class TimeApp : App
     {
-        public const int minWidth = 0;
-        public const int minHeight = 0;
-        public TimeApp(int x, int y, int height, int width, PictureBox p) : base(x, y, height, width, p, minWidth, minHeight)
+        public const int MIN_WIDTH = 0;
+        public const int MIN_HEIGHT = 0;
+        public const string APP_NAME = "TIME";
+        public TimeApp(int x, int y, int height, int width, PictureBox p) : base(x, y, height, width, p, MIN_WIDTH, MIN_HEIGHT, APP_NAME)
         {
             
         }

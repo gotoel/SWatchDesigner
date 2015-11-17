@@ -119,7 +119,7 @@
             // nsGroupBox3
             // 
             this.nsGroupBox3.DrawSeperator = true;
-            this.nsGroupBox3.Location = new System.Drawing.Point(7, 33);
+            this.nsGroupBox3.Location = new System.Drawing.Point(516, 33);
             this.nsGroupBox3.Name = "nsGroupBox3";
             this.nsGroupBox3.Size = new System.Drawing.Size(121, 139);
             this.nsGroupBox3.SubTitle = "";
@@ -133,9 +133,9 @@
             this.nsGroupBox2.Controls.Add(this.deleteLayoutBtn);
             this.nsGroupBox2.Controls.Add(this.saveLayoutBtn);
             this.nsGroupBox2.DrawSeperator = true;
-            this.nsGroupBox2.Location = new System.Drawing.Point(454, 34);
+            this.nsGroupBox2.Location = new System.Drawing.Point(7, 34);
             this.nsGroupBox2.Name = "nsGroupBox2";
-            this.nsGroupBox2.Size = new System.Drawing.Size(183, 138);
+            this.nsGroupBox2.Size = new System.Drawing.Size(190, 138);
             this.nsGroupBox2.SubTitle = "Settings/controls for current layout.";
             this.nsGroupBox2.TabIndex = 8;
             this.nsGroupBox2.Text = "nsGroupBox2";
@@ -151,7 +151,7 @@
             // 
             // deleteLayoutBtn
             // 
-            this.deleteLayoutBtn.Location = new System.Drawing.Point(3, 71);
+            this.deleteLayoutBtn.Location = new System.Drawing.Point(5, 71);
             this.deleteLayoutBtn.Name = "deleteLayoutBtn";
             this.deleteLayoutBtn.Size = new System.Drawing.Size(95, 23);
             this.deleteLayoutBtn.TabIndex = 1;
@@ -159,7 +159,7 @@
             // 
             // saveLayoutBtn
             // 
-            this.saveLayoutBtn.Location = new System.Drawing.Point(3, 42);
+            this.saveLayoutBtn.Location = new System.Drawing.Point(5, 42);
             this.saveLayoutBtn.Name = "saveLayoutBtn";
             this.saveLayoutBtn.Size = new System.Drawing.Size(95, 23);
             this.saveLayoutBtn.TabIndex = 0;
@@ -178,9 +178,9 @@
             this.nsGroupBox1.Controls.Add(this.nsTextBox2);
             this.nsGroupBox1.Controls.Add(this.nsTextBox1);
             this.nsGroupBox1.DrawSeperator = true;
-            this.nsGroupBox1.Location = new System.Drawing.Point(143, 34);
+            this.nsGroupBox1.Location = new System.Drawing.Point(203, 34);
             this.nsGroupBox1.Name = "nsGroupBox1";
-            this.nsGroupBox1.Size = new System.Drawing.Size(302, 138);
+            this.nsGroupBox1.Size = new System.Drawing.Size(307, 138);
             this.nsGroupBox1.SubTitle = "";
             this.nsGroupBox1.TabIndex = 7;
             this.nsGroupBox1.Text = "nsGroupBox1";
