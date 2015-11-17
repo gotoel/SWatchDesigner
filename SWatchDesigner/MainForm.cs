@@ -138,15 +138,27 @@ namespace SWatchDesigner
         private void panel10_Paint(object sender, PaintEventArgs e)
         {
             formGraphics = e.Graphics;
+            SolidBrush brush = new System.Drawing.SolidBrush(Color.FromArgb(128, 0, 0, 255)); //alpa, red, green, blue
+            SolidBrush strBrush = new System.Drawing.SolidBrush(Color.Red);
+            Pen pen = new System.Drawing.Pen(System.Drawing.Color.Tomato);
+            Font font = new Font(new FontFamily("Consolas"), 9.0f);
+            // draw grid
+            int numOfCells = 20;
+            int cellSize = 15;
+            Pen p = new Pen(Color.Black);
+
+            for (int y = 0; y < numOfCells; ++y)
+            {
+                formGraphics.DrawLine(p, 0, y * cellSize, numOfCells * cellSize, y * cellSize);
+            }
+
+            for (int x = 0; x < numOfCells; ++x)
+            {
+                formGraphics.DrawLine(p, x * cellSize, 0, x * cellSize, numOfCells * cellSize);
+            }
+
             if (isDown == true)
             {
-  
-
-
-                Pen pen = new System.Drawing.Pen(System.Drawing.Color.Tomato);
-                SolidBrush brush = new System.Drawing.SolidBrush(Color.Blue);
-
-                Font font = new Font(new FontFamily("Consolas"), 9.0f);
                 formGraphics.DrawString("X: " + curX + ", Y: " + curY, font, brush, curX, curY);
 
                 //this.Refresh();
@@ -165,13 +177,9 @@ namespace SWatchDesigner
             }
             foreach (App a in apps)
             {
-                Pen pen = new System.Drawing.Pen(System.Drawing.Color.Tomato);
-                SolidBrush brush = new System.Drawing.SolidBrush(Color.Blue);
-                SolidBrush strBrush = new System.Drawing.SolidBrush(Color.Red);
                 Rectangle app = a.getRect();
                 Rectangle appBorder = new Rectangle(a.getX() - 1, a.getY() - 1, a.getWidth() + 1, a.getHeight() + 1);
 
-                Font font = new Font(new FontFamily("Consolas"), 9.0f);
                 formGraphics.DrawRectangle(pen, appBorder);
                 formGraphics.FillRectangle(brush, app);
 
@@ -180,7 +188,7 @@ namespace SWatchDesigner
                 formGraphics.DrawString(info, font, strBrush, a.Center().X - TextRenderer.MeasureText(info,font, proposedSize).Width/2, a.Center().Y);
             }
 
-            formGraphics.DrawRectangle(new Pen(Color.Red),rect);
+            //formGraphics.DrawRectangle(new Pen(Color.Red),rect);
        
            
         }
