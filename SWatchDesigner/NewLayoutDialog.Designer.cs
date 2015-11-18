@@ -111,6 +111,7 @@ namespace SWatchDesigner
             this.LayoutNameTxt.TabIndex = 8;
             this.LayoutNameTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.LayoutNameTxt.UseSystemPasswordChar = false;
+            this.LayoutNameTxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LayoutNameTxt_KeyDown);
             // 
             // nsLabel1
             // 

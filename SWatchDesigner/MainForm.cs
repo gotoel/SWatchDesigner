@@ -38,7 +38,12 @@ namespace SWatchDesigner
         //tooltips
         private bool watchScreenTT = false;
 
+        private bool unsavedChanges = false;
+
         int selectedAppIndex = -1;
+        int selectedLayoutIndex = 0;
+
+        String appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
         private enum PosSizableRect
         {            
@@ -60,71 +65,101 @@ namespace SWatchDesigner
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             nsTheme1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.DoubleBuffered = true;
+
+            if(!Directory.Exists(appdata + "\\.SWatch\\Templates\\"))
+                Directory.CreateDirectory(appdata + "\\.SWatch\\Templates\\");
+            foreach (string file in Directory.GetFiles(appdata + "\\.SWatch\\Templates", "*.txt"))
+                nsTabControl1.TabPages.Add(Path.GetFileNameWithoutExtension(file));
+            loadLayout(nsTabControl1.SelectedTab.Text);
+            nsTabControl1.TabPages.Add("New layout");
             // Add available app names to the ListView.
-            String[] apps = { "GPS", "Compass", "Time", "Weight", "Tracker", "Signal", "Weather", "Calendar" };
+            String[] apps = { "GPS", "Compass", "Time", "Weight", "Tracker", "Signal", "Weather", "Calendar", "WeatherAltitude" };
             Array.Sort(apps);
             foreach (String app in apps)
             {
                 appList.AddItem(app);
             }
 
-            loadLayout("testTemplate");
+            //loadLayout("testTemplate");
         }
 
         private void loadLayout(String layoutName)
         {
-            String appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            StreamReader reader = File.OpenText(appdata + "\\.SWatch\\Templates\\" + layoutName + ".txt");
-            string line;
-            while ((line = reader.ReadLine()) != null)
+            try
             {
-                string[] items = line.Split('|');
-                // Now let's find the path.
-                foreach(string appSplit in items)
+                foreach (App a in apps)
+                    a.delete();
+                apps.Clear();
+                StreamReader reader = File.OpenText(appdata + "\\.SWatch\\Templates\\" + layoutName + ".txt");
+                string line;
+                while ((line = reader.ReadLine()) != null)
                 {
-                    if (!String.IsNullOrWhiteSpace(appSplit))
+                    string[] items = line.Split('|');
+                    // Now let's find the path.
+                    foreach (string appSplit in items)
                     {
-                        Console.WriteLine("APPSPLIT: " + appSplit);
-                        string[] data = appSplit.Split(',');
-                        int x = Int32.Parse(data[0]); int y = Int32.Parse(data[1]);
-                        int width = Int32.Parse(data[2]); int height = Int32.Parse(data[3]);
-                        switch (data[4].Replace("\"", ""))
+                        if (!String.IsNullOrWhiteSpace(appSplit))
                         {
-                            case "GPS":
-                                apps.Add(new GPSApp(x, y, width, height, panel10));
-                                break;
-                            case "COMPASS":
-                                apps.Add(new CompassApp(x, y, width, height, panel10));
-                                break;
-                            case "TIME":
-                                apps.Add(new TimeApp(x, y, width, height, panel10));
-                                break;
-                            case "WEIGHT":
-                                apps.Add(new WeightApp(x, y, width, height, panel10));
-                                break;
-                            case "TRACKER":
-                                apps.Add(new TrackerApp(x, y, width, height, panel10));
-                                break;
-                            case "SIGNAL":
-                                apps.Add(new SignalApp(x, y, width, height, panel10));
-                                break;
-                            case "WEATHER":
-                                apps.Add(new WeatherApp(x, y, width, height, panel10));
-                                break;
-                            case "CALENDAR":
-                                apps.Add(new CalendarApp(x, y, width, height, panel10));
-                                break;
-                            default:
-                                Console.WriteLine("Default case");
-                                break;
+                            Console.WriteLine("APPSPLIT: " + appSplit);
+                            string[] data = appSplit.Split(',');
+                            int x = Int32.Parse(data[0]); int y = Int32.Parse(data[1]);
+                            int width = Int32.Parse(data[2]); int height = Int32.Parse(data[3]);
+                            switch (data[4].Replace("\"", ""))
+                            {
+                                case "GPS":
+                                    apps.Add(new GPSApp(x, y, width, height, panel10));
+                                    break;
+                                case "COMPASS":
+                                    apps.Add(new CompassApp(x, y, width, height, panel10));
+                                    break;
+                                case "TIME":
+                                    apps.Add(new TimeApp(x, y, width, height, panel10));
+                                    break;
+                                case "WEIGHT":
+                                    apps.Add(new WeightApp(x, y, width, height, panel10));
+                                    break;
+                                case "TRACKER":
+                                    apps.Add(new TrackerApp(x, y, width, height, panel10));
+                                    break;
+                                case "SIGNAL":
+                                    apps.Add(new SignalApp(x, y, width, height, panel10));
+                                    break;
+                                case "WEATHER":
+                                    apps.Add(new WeatherApp(x, y, width, height, panel10));
+                                    break;
+                                case "CALENDAR":
+                                    apps.Add(new CalendarApp(x, y, width, height, panel10));
+                                    break;
+                                case "WEATHERALTITUDE":
+                                    apps.Add(new WeatherAltitudeApp(x, y, width, height, panel10));
+                                    break;
+                                default:
+                                    Console.WriteLine("Default case");
+                                    break;
+                            }
                         }
                     }
                 }
-
-                // At this point, `myInteger` and `path` contain the values we want
-                // for the current line. We can then store those values or print them,
-                // or anything else we like.
+                reader.Close();
             }
+            catch { }
+            finally
+            {
+                this.Refresh();
+            }
+        }
+
+        private void saveLayout(String layoutName)
+        {
+            string data = "";
+            foreach (App a in apps)
+                data += a.getX() + "," + a.getY() + "," + a.getWidth() + "," + a.getHeight() + ",\"" + a.getName() + "\"|";
+            File.WriteAllText(appdata + "\\.SWatch\\Templates\\" + layoutName + ".txt",data);
+        }
+
+        private void deleteLayout(String layoutName)
+        {
+            File.Delete(appdata + "\\.SWatch\\Templates\\" + layoutName + ".txt");
         }
 
         private void nsTheme1_MouseDown(object sender, MouseEventArgs e)
@@ -147,6 +182,16 @@ namespace SWatchDesigner
         private void nsTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Check if the "New layout" tab was clicked.
+            if (unsavedChanges)
+            {
+                SaveDialog saveDialog = new SaveDialog();
+
+                // Show testDialog as a modal dialog and determine if DialogResult = OK.
+                if (saveDialog.ShowDialog(this) == DialogResult.OK)
+                    saveLayout(nsTabControl1.TabPages[selectedLayoutIndex].Text);
+                saveDialog.Dispose();
+                unsavedChanges = false;
+            }
             if (nsTabControl1.SelectedIndex == nsTabControl1.TabPages.Count-1)
             {
                 // Display layout naming screen.
@@ -158,6 +203,10 @@ namespace SWatchDesigner
       				// Read the contents of testDialog's TextBox.
       				//this.txtResult.Text = newLayoutDialog.LayoutNameTxt.Text;
                     Console.WriteLine("OK, Layout name: " + newLayoutDialog.LayoutNameTxt.Text);
+                    foreach (App a in apps)
+                        a.delete();
+                    apps.Clear();
+                    saveLayout(newLayoutDialog.LayoutNameTxt.Text);
                     nsTabControl1.SelectedTab.Text = newLayoutDialog.LayoutNameTxt.Text;
                     nsTabControl1.TabPages.Add("New layout");
    				}
@@ -173,9 +222,12 @@ namespace SWatchDesigner
             }
             else
             {
-                //load selected layout
+                loadLayout(nsTabControl1.SelectedTab.Text);
 
             }
+            selectedLayoutIndex = nsTabControl1.SelectedIndex;
+            Console.WriteLine("SELECTED LAYOUT INDEX: " + selectedLayoutIndex);
+            this.Refresh();
         }
 
         private void MainForm_Paint(object sender, PaintEventArgs e)
@@ -210,7 +262,7 @@ namespace SWatchDesigner
         private void panel10_Paint(object sender, PaintEventArgs e)
         {
             formGraphics = e.Graphics;
-            SolidBrush brush = new System.Drawing.SolidBrush(Color.FromArgb(128, 0, 0, 255)); //alpa, red, green, blue
+            SolidBrush brush = new System.Drawing.SolidBrush(Color.FromArgb(128, 205, 150, 0)); //alpa, red, green, blue
             SolidBrush strBrush = new System.Drawing.SolidBrush(Color.Red);
             Pen pen = new System.Drawing.Pen(System.Drawing.Color.Tomato);
             Font font = new Font(new FontFamily("Consolas"), 9.0f);
@@ -251,11 +303,11 @@ namespace SWatchDesigner
 
                 Size proposedSize = new Size(int.MaxValue, int.MaxValue);
                 String info = "X: " + a.getX() + ", Y: " + a.getY() + ", Width: " + a.getWidth() + ", Height: " + a.getHeight();
-                formGraphics.DrawString(info, font, strBrush, a.Center().X - TextRenderer.MeasureText(info,font, proposedSize).Width/2, a.Center().Y);
+                //formGraphics.DrawString(info, font, strBrush, a.Center().X - TextRenderer.MeasureText(info,font, proposedSize).Width/2, a.Center().Y);
             }
 
             //formGraphics.DrawRectangle(new Pen(Color.Red),rect);
-            Console.WriteLine("APP INDEX: " + selectedAppIndex);
+            //Console.WriteLine("APP INDEX: " + selectedAppIndex);
        
            
         }
@@ -276,6 +328,7 @@ namespace SWatchDesigner
                     rect = app.getRect();
                     mIsClick = false;
                     selectedAppIndex = apps.IndexOf(app);
+                    unsavedChanges = true;
                     app.isSelected = true;
                 }
                 else
@@ -351,16 +404,51 @@ namespace SWatchDesigner
                         intersects = true;
                 }
                 if(!intersects) {
-                    App newApp = new App((int)Math.Min(curX, initialX), (int)Math.Min(curY, initialY), (int)Math.Abs(curX - initialX), (int)Math.Abs(curY - initialY), panel10);
-                    apps.Add(newApp);
+                    int x = (int)Math.Min(curX, initialX); int y = (int)Math.Min(curY, initialY);
+                    int width = (int)Math.Abs(curX - initialX); int height = (int)Math.Abs(curY - initialY);
+                    switch (appList.SelectedItems[0].Text.ToLower())
+                    {
+                        case "gps":
+                            Console.WriteLine("NEW GPS APP!!!");
+                            apps.Add(new GPSApp(x, y, width, height, panel10));
+                            break;
+                        case "compass":
+                            apps.Add(new CompassApp(x, y, width, height, panel10));
+                            break;
+                        case "time":
+                            apps.Add(new TimeApp(x, y, width, height, panel10));
+                            break;
+                        case "weight":
+                            apps.Add(new WeightApp(x, y, width, height, panel10));
+                            break;
+                        case "tracker":
+                            apps.Add(new TrackerApp(x, y, width, height, panel10));
+                            break;
+                        case "signal":
+                            apps.Add(new SignalApp(x, y, width, height, panel10));
+                            break;
+                        case "weather":
+                            apps.Add(new WeatherApp(x, y, width, height, panel10));
+                            break;
+                        case "calendar":
+                            apps.Add(new CalendarApp(x, y, width, height, panel10));
+                            break;
+                        case "weatheraltitude":
+                            apps.Add(new WeatherAltitudeApp(x, y, width, height, panel10));
+                            break;
+                        default:
+                            Console.WriteLine("Default case");
+                            break;
+                    }
                     curX = 0; curY = 0; initialX = 0; initialY = 0;
                     selectedAppIndex++;
+                    appList.ClearSelected();
+                    if (!unsavedChanges)
+                        unsavedChanges = true;
                 }
             }
             isDown = false;
             this.Refresh();
-
-            appList.ClearSelected();
         }
 
 
@@ -402,6 +490,29 @@ namespace SWatchDesigner
             }
         }
 
+        private void saveLayoutBtn_Click(object sender, EventArgs e)
+        {
+            saveLayout(nsTabControl1.SelectedTab.Text);
+            unsavedChanges = false;
+        }
 
+        private void deleteLayoutBtn_Click(object sender, EventArgs e)
+        {
+            DeleteDialog deleteDialog = new DeleteDialog();
+
+            // Show testDialog as a modal dialog and determine if DialogResult = OK.
+            if (deleteDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                deleteLayout(nsTabControl1.SelectedTab.Text);
+                nsTabControl1.TabPages.RemoveAt(nsTabControl1.SelectedIndex);
+                //nsTabControl1.DeselectTab(nsTabControl1.SelectedTab.Text);
+                
+            }
+            else
+            {
+                Console.WriteLine("Cancelled");
+            }
+            deleteDialog.Dispose();
+        }
     }
 }

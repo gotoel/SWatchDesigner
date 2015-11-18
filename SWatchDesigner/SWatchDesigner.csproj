@@ -49,10 +49,20 @@
     <Compile Include="Apps\TrackerApp.cs" />
     <Compile Include="Apps\CalendarApp.cs" />
     <Compile Include="Apps\SignalApp.cs" />
+    <Compile Include="Apps\WeatherAltitudeApp.cs" />
     <Compile Include="Apps\WeatherApp.cs" />
     <Compile Include="Apps\WeightApp.cs" />
     <Compile Include="Apps\GPSApp.cs" />
     <Compile Include="Apps\TimeApp.cs" />
+    <Compile Include="DeleteDialog.Designer.cs">
+      <DependentUpon>DeleteDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SaveDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SaveDialog.Designer.cs">
+      <DependentUpon>SaveDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +71,9 @@
     </Compile>
     <Compile Include="MonoFlat.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DeleteDialog.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="NewLayoutDialog.cs">
       <SubType>Form</SubType>
@@ -77,8 +90,14 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UserRect.cs" />
+    <EmbeddedResource Include="SaveDialog.resx">
+      <DependentUpon>SaveDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeleteDialog.resx">
+      <DependentUpon>DeleteDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewLayoutDialog.resx">
       <DependentUpon>NewLayoutDialog.cs</DependentUpon>

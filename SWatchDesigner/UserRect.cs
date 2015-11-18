@@ -17,10 +17,14 @@ namespace SWatchDesigner
         private int oldX;
         private int oldY;
         private int sizeNodeRect= 5;
-        private Bitmap mBmp=null;
         private PosSizableRect nodeSelected = PosSizableRect.None;
-        private int angle = 30;
         private App parentApp;
+
+        int FontSizeDefault = 80;
+        int FontSizeMinimum = 4;
+        Font DefaultFont;
+        SolidBrush StringBrush = new SolidBrush(Color.Black);
+
 
         private enum PosSizableRect
         {            
@@ -40,6 +44,7 @@ namespace SWatchDesigner
         {
             rect = r;
             mIsClick = false;
+            DefaultFont = new Font("Tahoma", FontSizeDefault, FontStyle.Regular);
         }
 
         public void Draw(Graphics g)
@@ -52,22 +57,53 @@ namespace SWatchDesigner
                 {
                     g.DrawRectangle(new Pen(Color.Red),GetRect(pos));
                 }     
-            }      
+            }
+
+            Font AdjustedFont = GetAdjustedFont(g, parentApp.getData(),
+               DefaultFont, rect.Width, FontSizeDefault, FontSizeMinimum, true);
+
+            SizeF AdjustedSizeNew = g.MeasureString(parentApp.getData(), AdjustedFont);
+            g.DrawString(parentApp.getData(), AdjustedFont, StringBrush, parentApp.Center().X - AdjustedSizeNew.Width / 2, parentApp.Center().Y - AdjustedSizeNew.Height / 2);
+          
         }
 
-        //This function checks the room size and your text and appropriate font for your text to fit in room
-        //PreferedFont is the Font that you wish to apply
-        //Room is your space in which your text should be in.
-        //LongString is the string which it's bounds is more than room bounds.
-        private Font FindFont(System.Drawing.Graphics g, string longString, Size Room, Font PreferedFont)
+        public Font GetAdjustedFont(Graphics GraphicRef, string GraphicString, Font OriginalFont, int ContainerWidth, int MaxFontSize, int MinFontSize, bool SmallestOnFail)
         {
-            //you should perform some scale functions!!!
-            SizeF RealSize = g.MeasureString(longString, PreferedFont);
-            float HeightScaleRatio = Room.Height / RealSize.Height;
-            float WidthScaleRatio = Room.Width / RealSize.Width;
-            float ScaleRatio = (HeightScaleRatio < WidthScaleRatio) ? ScaleRatio = HeightScaleRatio : ScaleRatio = WidthScaleRatio;
-            float ScaleFontSize = PreferedFont.Size * ScaleRatio;
-            return new Font(PreferedFont.FontFamily, ScaleFontSize);
+            // We utilize MeasureString which we get via a control instance           
+            for (int AdjustedSize = MaxFontSize; AdjustedSize >= MinFontSize; AdjustedSize--)
+            {
+                Font TestFont = new Font(OriginalFont.Name, AdjustedSize, OriginalFont.Style);
+
+                // Test the string with the new size
+                SizeF AdjustedSizeNew = GraphicRef.MeasureString(GraphicString, TestFont);
+
+                if (ContainerWidth > Convert.ToInt32(AdjustedSizeNew.Width))
+                {
+                    for (; AdjustedSize >= MinFontSize; AdjustedSize--)
+                    {
+                        TestFont = new Font(OriginalFont.Name, AdjustedSize, OriginalFont.Style);
+
+                        // Test the string with the new size
+                        AdjustedSizeNew = GraphicRef.MeasureString(GraphicString, TestFont);
+                        if (rect.Height > Convert.ToInt32(AdjustedSizeNew.Height))
+                            return TestFont;
+
+                    }
+                    // Good font, return it
+                    //return TestFont;
+                }
+            }
+
+            // If you get here there was no fontsize that worked
+            // return MinimumSize or Original?
+            if (SmallestOnFail)
+            {
+                return new Font(OriginalFont.Name, MinFontSize, OriginalFont.Style);
+            }
+            else
+            {
+                return OriginalFont;
+            }
         }
 
         private void panel_Paint(object sender, PaintEventArgs e)
@@ -118,6 +154,8 @@ namespace SWatchDesigner
             Rectangle backupRect = rect;
             int panelOffset = 2;
             int panelMin = 1;
+            int minWidth = parentApp.getMinWidth();
+            int minHeight = rect.Width;
             switch (nodeSelected)
             {
                 case PosSizableRect.LeftUp:
@@ -172,7 +210,7 @@ namespace SWatchDesigner
                         rect.Height -= e.Y - oldY;
                     break;
 
-                default:
+                default: 
                     if (mMove)
                     {
                         if ((rect.X + e.X - oldX) + rect.Width < panel.Width - panelOffset)

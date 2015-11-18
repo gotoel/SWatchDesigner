@@ -38,6 +38,7 @@ namespace SWatchDesigner
             this.minWidth = minWidth;
             this.minHeight = minHeight;
             this.appName = appName;
+            this.appData = appData;
         }
 
         public void setX(int x) { this.x = x; }

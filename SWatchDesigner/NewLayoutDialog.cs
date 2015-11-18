@@ -48,5 +48,22 @@ namespace SWatchDesigner
 			this.DialogResult = DialogResult.Cancel;
 			this.Close();
 		}
+
+        private void LayoutNameTxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (!string.IsNullOrWhiteSpace(LayoutNameTxt.Text.Trim()))
+                {
+                    LayoutNameTxt.Text = LayoutNameTxt.Text.Replace(" ", "");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    errorLabel.Visible = true;
+                }
+            }
+        }
 	}
 }

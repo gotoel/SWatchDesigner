@@ -48,9 +48,6 @@
             this.nsTextBox1 = new NSTextBox();
             this.nsGroupBox7 = new NSGroupBox();
             this.nsTabControl1 = new NSTabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel10 = new System.Windows.Forms.PictureBox();
             this.nsGroupBox8 = new NSGroupBox();
             this.nsTextBox4 = new NSTextBox();
@@ -71,7 +68,6 @@
             this.nsGroupBox2.SuspendLayout();
             this.nsGroupBox1.SuspendLayout();
             this.nsGroupBox7.SuspendLayout();
-            this.nsTabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel10)).BeginInit();
             this.nsGroupBox8.SuspendLayout();
             this.nsGroupBox9.SuspendLayout();
@@ -156,6 +152,7 @@
             this.deleteLayoutBtn.Size = new System.Drawing.Size(95, 23);
             this.deleteLayoutBtn.TabIndex = 1;
             this.deleteLayoutBtn.Text = "Delete layout";
+            this.deleteLayoutBtn.Click += new System.EventHandler(this.deleteLayoutBtn_Click);
             // 
             // saveLayoutBtn
             // 
@@ -164,6 +161,7 @@
             this.saveLayoutBtn.Size = new System.Drawing.Size(95, 23);
             this.saveLayoutBtn.TabIndex = 0;
             this.saveLayoutBtn.Text = "Save layout";
+            this.saveLayoutBtn.Click += new System.EventHandler(this.saveLayoutBtn_Click);
             // 
             // nsGroupBox1
             // 
@@ -341,9 +339,6 @@
             // 
             this.nsTabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.nsTabControl1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.nsTabControl1.Controls.Add(this.tabPage1);
-            this.nsTabControl1.Controls.Add(this.tabPage2);
-            this.nsTabControl1.Controls.Add(this.tabPage3);
             this.nsTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.nsTabControl1.ItemSize = new System.Drawing.Size(28, 115);
             this.nsTabControl1.Location = new System.Drawing.Point(5, 13);
@@ -355,36 +350,6 @@
             this.nsTabControl1.TabIndex = 26;
             this.nsTabControl1.SelectedIndexChanged += new System.EventHandler(this.nsTabControl1_SelectedIndexChanged);
             this.nsTabControl1.TabIndexChanged += new System.EventHandler(this.nsTabControl1_SelectedIndexChanged);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.tabPage1.Location = new System.Drawing.Point(119, 4);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(0, 449);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Survival";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.tabPage2.Location = new System.Drawing.Point(119, 4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(0, 449);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Casual";
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.tabPage3.Location = new System.Drawing.Point(119, 4);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(0, 449);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "New layout";
             // 
             // panel10
             // 
@@ -591,7 +556,6 @@
             this.nsGroupBox1.ResumeLayout(false);
             this.nsGroupBox1.PerformLayout();
             this.nsGroupBox7.ResumeLayout(false);
-            this.nsTabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panel10)).EndInit();
             this.nsGroupBox8.ResumeLayout(false);
             this.nsGroupBox8.PerformLayout();
@@ -639,8 +603,5 @@
         private NSContextMenu nsContextMenu2;
         private NSGroupBox nsGroupBox3;
         private NSTabControl nsTabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
     }
 }
