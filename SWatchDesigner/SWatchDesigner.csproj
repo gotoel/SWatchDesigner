@@ -57,6 +57,9 @@
     <Compile Include="DeleteDialog.Designer.cs">
       <DependentUpon>DeleteDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="LedBulb.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SaveDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +113,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -124,7 +128,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Images\2000px-USB_Icon.svg.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

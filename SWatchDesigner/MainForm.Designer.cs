@@ -31,6 +31,8 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.nsTheme1 = new NSTheme();
             this.nsGroupBox3 = new NSGroupBox();
+            this.monoFlat_Label6 = new MonoFlat.MonoFlat_Label();
+            this.ledBulb1 = new Bulb.LedBulb();
             this.nsGroupBox2 = new NSGroupBox();
             this.renameLayoutBtn = new NSButton();
             this.deleteLayoutBtn = new NSButton();
@@ -65,6 +67,7 @@
             this.nsContextMenu1 = new NSContextMenu();
             this.nsContextMenu2 = new NSContextMenu();
             this.nsTheme1.SuspendLayout();
+            this.nsGroupBox3.SuspendLayout();
             this.nsGroupBox2.SuspendLayout();
             this.nsGroupBox1.SuspendLayout();
             this.nsGroupBox7.SuspendLayout();
@@ -114,6 +117,8 @@
             // 
             // nsGroupBox3
             // 
+            this.nsGroupBox3.Controls.Add(this.monoFlat_Label6);
+            this.nsGroupBox3.Controls.Add(this.ledBulb1);
             this.nsGroupBox3.DrawSeperator = true;
             this.nsGroupBox3.Location = new System.Drawing.Point(516, 33);
             this.nsGroupBox3.Name = "nsGroupBox3";
@@ -122,6 +127,28 @@
             this.nsGroupBox3.TabIndex = 9;
             this.nsGroupBox3.Text = "nsGroupBox3";
             this.nsGroupBox3.Title = "USB Status";
+            // 
+            // monoFlat_Label6
+            // 
+            this.monoFlat_Label6.AutoSize = true;
+            this.monoFlat_Label6.BackColor = System.Drawing.Color.Transparent;
+            this.monoFlat_Label6.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.monoFlat_Label6.ForeColor = System.Drawing.Color.DarkRed;
+            this.monoFlat_Label6.Location = new System.Drawing.Point(21, 111);
+            this.monoFlat_Label6.Name = "monoFlat_Label6";
+            this.monoFlat_Label6.Size = new System.Drawing.Size(79, 15);
+            this.monoFlat_Label6.TabIndex = 2;
+            this.monoFlat_Label6.Text = "Disconnected";
+            // 
+            // ledBulb1
+            // 
+            this.ledBulb1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(150)))), ((int)(((byte)(0)))));
+            this.ledBulb1.Location = new System.Drawing.Point(31, 43);
+            this.ledBulb1.Name = "ledBulb1";
+            this.ledBulb1.On = true;
+            this.ledBulb1.Size = new System.Drawing.Size(83, 55);
+            this.ledBulb1.TabIndex = 1;
+            this.ledBulb1.Text = "ledBulb1";
             // 
             // nsGroupBox2
             // 
@@ -207,7 +234,6 @@
             this.nsTextBox6.ReadOnly = false;
             this.nsTextBox6.Size = new System.Drawing.Size(81, 23);
             this.nsTextBox6.TabIndex = 10;
-            this.nsTextBox6.Text = "3/12";
             this.nsTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nsTextBox6.UseSystemPasswordChar = false;
             // 
@@ -234,7 +260,6 @@
             this.nsTextBox5.ReadOnly = false;
             this.nsTextBox5.Size = new System.Drawing.Size(81, 23);
             this.nsTextBox5.TabIndex = 8;
-            this.nsTextBox5.Text = "AT&T";
             this.nsTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nsTextBox5.UseSystemPasswordChar = false;
             // 
@@ -261,7 +286,6 @@
             this.nsTextBox3.ReadOnly = false;
             this.nsTextBox3.Size = new System.Drawing.Size(81, 23);
             this.nsTextBox3.TabIndex = 6;
-            this.nsTextBox3.Text = "0.7GB / 2GB";
             this.nsTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nsTextBox3.UseSystemPasswordChar = false;
             // 
@@ -300,7 +324,6 @@
             this.nsTextBox2.ReadOnly = false;
             this.nsTextBox2.Size = new System.Drawing.Size(81, 23);
             this.nsTextBox2.TabIndex = 3;
-            this.nsTextBox2.Text = "1.0013";
             this.nsTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nsTextBox2.UseSystemPasswordChar = false;
             // 
@@ -315,7 +338,6 @@
             this.nsTextBox1.ReadOnly = false;
             this.nsTextBox1.Size = new System.Drawing.Size(81, 23);
             this.nsTextBox1.TabIndex = 1;
-            this.nsTextBox1.Text = "SWatch-One";
             this.nsTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nsTextBox1.UseSystemPasswordChar = false;
             // 
@@ -552,6 +574,8 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
             this.nsTheme1.ResumeLayout(false);
+            this.nsGroupBox3.ResumeLayout(false);
+            this.nsGroupBox3.PerformLayout();
             this.nsGroupBox2.ResumeLayout(false);
             this.nsGroupBox1.ResumeLayout(false);
             this.nsGroupBox1.PerformLayout();
@@ -603,5 +627,7 @@
         private NSContextMenu nsContextMenu2;
         private NSGroupBox nsGroupBox3;
         private NSTabControl nsTabControl1;
+        private Bulb.LedBulb ledBulb1;
+        private MonoFlat.MonoFlat_Label monoFlat_Label6;
     }
 }

@@ -45,6 +45,11 @@ namespace SWatchDesigner
 
         String appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
+        string[,] defaultLayouts = new string[3, 2]{ { "Casual", "152,1,147,118,\"CALENDAR\"|1,1,151,118,\"WEATHER\"|1,119,298,107,\"TIME\"|" }, 
+                                                     { "Survival", "1,1,165,163,\"GPS\"|1,164,165,135,\"TIME\"|166,164,133,135,\"COMPASS\"|166,1,133,162,\"WEATHER\"|" }, 
+                                                     { "Time", "1,1,298,298,\"TIME\"|" } };
+
+        private bool USBConnected = false;
         private enum PosSizableRect
         {            
             UpMiddle,
@@ -56,7 +61,7 @@ namespace SWatchDesigner
             RightBottom,
             BottomMiddle,
             None
-
+            
         };
 
         public MainForm()
@@ -66,8 +71,12 @@ namespace SWatchDesigner
             nsTheme1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.DoubleBuffered = true;
 
-            if(!Directory.Exists(appdata + "\\.SWatch\\Templates\\"))
+            if (!Directory.Exists(appdata + "\\.SWatch\\Templates\\"))
+            {
                 Directory.CreateDirectory(appdata + "\\.SWatch\\Templates\\");
+                for (int i = 0; i < defaultLayouts.GetLength(0); i++)
+                    saveLayout(defaultLayouts[i, 0], defaultLayouts[i, 1]);
+            }
             foreach (string file in Directory.GetFiles(appdata + "\\.SWatch\\Templates", "*.txt"))
                 nsTabControl1.TabPages.Add(Path.GetFileNameWithoutExtension(file));
             loadLayout(nsTabControl1.SelectedTab.Text);
@@ -149,7 +158,7 @@ namespace SWatchDesigner
             }
         }
 
-        private void saveLayout(String layoutName)
+        private void saveLayout(string layoutName)
         {
             string data = "";
             foreach (App a in apps)
@@ -157,8 +166,14 @@ namespace SWatchDesigner
             File.WriteAllText(appdata + "\\.SWatch\\Templates\\" + layoutName + ".txt",data);
         }
 
+        private void saveLayout(string layoutName, string data)
+        {
+            File.WriteAllText(appdata + "\\.SWatch\\Templates\\" + layoutName + ".txt", data);
+        }
+
         private void deleteLayout(String layoutName)
         {
+            unsavedChanges = false;
             File.Delete(appdata + "\\.SWatch\\Templates\\" + layoutName + ".txt");
         }
 
@@ -222,7 +237,8 @@ namespace SWatchDesigner
             }
             else
             {
-                loadLayout(nsTabControl1.SelectedTab.Text);
+                if(nsTabControl1.SelectedIndex >= 0)
+                    loadLayout(nsTabControl1.SelectedTab.Text);
 
             }
             selectedLayoutIndex = nsTabControl1.SelectedIndex;
@@ -252,13 +268,71 @@ namespace SWatchDesigner
         {
             while (true)
             {
-                Invalidate();
-
-                System.Threading.Thread.Sleep(100);
+                if (!USBConnected)
+                {
+                    if (File.Exists(appdata + "\\.SWatch\\connected"))
+                        connectUSB();
+                }
+                else
+                {
+                    if (!File.Exists(appdata + "\\.SWatch\\connected"))
+                        disconnectUSB();
+                }
+                Console.WriteLine("USB status: " + USBConnected);
+                    System.Threading.Thread.Sleep(100);
             }
            
         }
 
+        public async Task connectUSB()
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new Action(() => connectUSB()));
+                return;
+            }
+            USBConnected = true;
+            ledBulb1.On = true;
+            monoFlat_Label6.Text = "  Connected";
+            monoFlat_Label6.ForeColor = Color.Green;
+
+            await sleepRandomTime();
+            nsTextBox1.Text = "SWatch-One";
+            await sleepRandomTime();
+            nsTextBox2.Text = "1.0013";
+            await sleepRandomTime();
+            nsTextBox3.Text = "0.7GB / 2GB";
+            await sleepRandomTime();
+            nsTextBox5.Text = "AT&T";
+            await sleepRandomTime();
+            nsTextBox6.Text = "3/12";
+        }
+
+        private void disconnectUSB()
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new Action(() => disconnectUSB()));
+                return;
+            }
+            USBConnected = false;
+            ledBulb1.On = false;
+            monoFlat_Label6.Text = "Disconnected";
+            monoFlat_Label6.ForeColor = Color.DarkRed;
+            nsTextBox1.Text = "";
+            nsTextBox2.Text = "";
+            nsTextBox3.Text = "";
+            nsTextBox5.Text = "";
+            nsTextBox6.Text = "";
+        }
+
+        public async Task sleepRandomTime()
+        {
+            Random random = new Random();
+            int myRandomNumber = random.Next(2000 - 200) + 200;
+            //System.Threading.Thread.Sleep(myRandomNumber);
+            await Task.Delay(myRandomNumber);
+        }
         private void panel10_Paint(object sender, PaintEventArgs e)
         {
             formGraphics = e.Graphics;
