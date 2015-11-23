@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.nsTheme1 = new NSTheme();
             this.nsGroupBox3 = new NSGroupBox();
             this.monoFlat_Label6 = new MonoFlat.MonoFlat_Label();
@@ -81,6 +82,10 @@
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
+            // backgroundWorker2
+            // 
+            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
+            // 
             // nsTheme1
             // 
             this.nsTheme1.AccentOffset = 0;
@@ -106,7 +111,7 @@
             this.nsTheme1.Sizable = false;
             this.nsTheme1.Size = new System.Drawing.Size(645, 663);
             this.nsTheme1.SmartBounds = true;
-            this.nsTheme1.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation;
+            this.nsTheme1.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.nsTheme1.TabIndex = 1;
             this.nsTheme1.Text = "nsTheme1";
             this.nsTheme1.TransparencyKey = System.Drawing.Color.Empty;
@@ -145,7 +150,7 @@
             this.ledBulb1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(150)))), ((int)(((byte)(0)))));
             this.ledBulb1.Location = new System.Drawing.Point(31, 43);
             this.ledBulb1.Name = "ledBulb1";
-            this.ledBulb1.On = true;
+            this.ledBulb1.On = false;
             this.ledBulb1.Size = new System.Drawing.Size(83, 55);
             this.ledBulb1.TabIndex = 1;
             this.ledBulb1.Text = "ledBulb1";
@@ -538,6 +543,7 @@
             this.nsControlButton1.Size = new System.Drawing.Size(18, 20);
             this.nsControlButton1.TabIndex = 1;
             this.nsControlButton1.Text = "nsControlButton1";
+            this.nsControlButton1.Click += new System.EventHandler(this.nsControlButton1_Click);
             // 
             // nsLabel1
             // 
@@ -570,6 +576,7 @@
             this.Controls.Add(this.nsTheme1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
@@ -629,5 +636,6 @@
         private NSTabControl nsTabControl1;
         private Bulb.LedBulb ledBulb1;
         private MonoFlat.MonoFlat_Label monoFlat_Label6;
+        private System.ComponentModel.BackgroundWorker backgroundWorker2;
     }
 }

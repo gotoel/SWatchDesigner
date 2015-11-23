@@ -45,11 +45,12 @@ namespace SWatchDesigner
 
         String appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
-        string[,] defaultLayouts = new string[3, 2]{ { "Casual", "152,1,147,118,\"CALENDAR\"|1,1,151,118,\"WEATHER\"|1,119,298,107,\"TIME\"|" }, 
+        string[,] defaultLayouts = new string[3, 2]{ { "Casual", "152,1,147,118,\"CALENDAR\"|1,1,151,118,\"WEATHER\"|1,119,298,180,\"TIME\"|" }, 
                                                      { "Survival", "1,1,165,163,\"GPS\"|1,164,165,135,\"TIME\"|166,164,133,135,\"COMPASS\"|166,1,133,162,\"WEATHER\"|" }, 
                                                      { "Time", "1,1,298,298,\"TIME\"|" } };
 
         private bool USBConnected = false;
+        private bool dataRead = false;
         private enum PosSizableRect
         {            
             UpMiddle,
@@ -109,7 +110,7 @@ namespace SWatchDesigner
                     {
                         if (!String.IsNullOrWhiteSpace(appSplit))
                         {
-                            Console.WriteLine("APPSPLIT: " + appSplit);
+                            //Console.WriteLine("APPSPLIT: " + appSplit);
                             string[] data = appSplit.Split(',');
                             int x = Int32.Parse(data[0]); int y = Int32.Parse(data[1]);
                             int width = Int32.Parse(data[2]); int height = Int32.Parse(data[3]);
@@ -143,7 +144,7 @@ namespace SWatchDesigner
                                     apps.Add(new WeatherAltitudeApp(x, y, width, height, panel10));
                                     break;
                                 default:
-                                    Console.WriteLine("Default case");
+                                    //Console.WriteLine("Default case");
                                     break;
                             }
                         }
@@ -217,7 +218,7 @@ namespace SWatchDesigner
    				{
       				// Read the contents of testDialog's TextBox.
       				//this.txtResult.Text = newLayoutDialog.LayoutNameTxt.Text;
-                    Console.WriteLine("OK, Layout name: " + newLayoutDialog.LayoutNameTxt.Text);
+                    //Console.WriteLine("OK, Layout name: " + newLayoutDialog.LayoutNameTxt.Text);
                     foreach (App a in apps)
                         a.delete();
                     apps.Clear();
@@ -228,12 +229,12 @@ namespace SWatchDesigner
    				else
    				{
       				//this.txtResult.Text = "Cancelled";
-      				Console.WriteLine("Cancelled");
+      				//Console.WriteLine("Cancelled");
                     nsTabControl1.SelectedIndex = nsTabControl1.SelectedIndex - 1;
                     //load previous tab/keep tab loaded
    				}
    				newLayoutDialog.Dispose();
-   				Console.WriteLine("Continue");
+   				//Console.WriteLine("Continue");
             }
             else
             {
@@ -242,7 +243,7 @@ namespace SWatchDesigner
 
             }
             selectedLayoutIndex = nsTabControl1.SelectedIndex;
-            Console.WriteLine("SELECTED LAYOUT INDEX: " + selectedLayoutIndex);
+            //Console.WriteLine("SELECTED LAYOUT INDEX: " + selectedLayoutIndex);
             this.Refresh();
         }
 
@@ -256,12 +257,50 @@ namespace SWatchDesigner
 
             //ResizeRedraw = true;
             backgroundWorker1.RunWorkerAsync();
+            backgroundWorker2.RunWorkerAsync();
     
         }
 
         private void nsTheme1_Paint(object sender, PaintEventArgs e)
         {
             this.Refresh();
+        }
+
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                if (dataRead && USBConnected)
+                {
+                    Random random = new Random();
+                    int myRandomNumber = random.Next(100 - 20) + 20;
+                    ledBulb1.On = false;
+                    System.Threading.Thread.Sleep(myRandomNumber);
+                    ledBulb1.On = true;
+                    myRandomNumber = random.Next(500 - 100) + 100;
+                    System.Threading.Thread.Sleep(myRandomNumber);
+                    myRandomNumber = random.Next(100 - 20) + 20;
+                    ledBulb1.On = false;
+                    System.Threading.Thread.Sleep(myRandomNumber);
+                    ledBulb1.On = true;
+                    myRandomNumber = random.Next(500 - 100) + 100;
+                    System.Threading.Thread.Sleep(myRandomNumber);
+                    myRandomNumber = random.Next(100 - 20) + 20;
+                    ledBulb1.On = false;
+                    System.Threading.Thread.Sleep(myRandomNumber);
+                    ledBulb1.On = true;
+                    myRandomNumber = random.Next(500 - 100) + 100;
+                    System.Threading.Thread.Sleep(myRandomNumber);
+                    myRandomNumber = random.Next(100 - 20) + 20;
+                    ledBulb1.On = false;
+                    System.Threading.Thread.Sleep(myRandomNumber);
+                    ledBulb1.On = true;
+                    myRandomNumber = random.Next(500 - 100) + 100;
+                    System.Threading.Thread.Sleep(myRandomNumber);
+                    
+                }
+            }
+
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -271,14 +310,16 @@ namespace SWatchDesigner
                 if (!USBConnected)
                 {
                     if (File.Exists(appdata + "\\.SWatch\\connected"))
+                    {
                         connectUSB();
+                    }
                 }
                 else
                 {
                     if (!File.Exists(appdata + "\\.SWatch\\connected"))
                         disconnectUSB();
                 }
-                Console.WriteLine("USB status: " + USBConnected);
+                //Console.WriteLine("USB status: " + USBConnected);
                     System.Threading.Thread.Sleep(100);
             }
            
@@ -291,6 +332,7 @@ namespace SWatchDesigner
                 this.Invoke(new Action(() => connectUSB()));
                 return;
             }
+            dataRead = true;
             USBConnected = true;
             ledBulb1.On = true;
             monoFlat_Label6.Text = "  Connected";
@@ -306,6 +348,7 @@ namespace SWatchDesigner
             nsTextBox5.Text = "AT&T";
             await sleepRandomTime();
             nsTextBox6.Text = "3/12";
+            dataRead = false;
         }
 
         private void disconnectUSB()
@@ -483,7 +526,6 @@ namespace SWatchDesigner
                     switch (appList.SelectedItems[0].Text.ToLower())
                     {
                         case "gps":
-                            Console.WriteLine("NEW GPS APP!!!");
                             apps.Add(new GPSApp(x, y, width, height, panel10));
                             break;
                         case "compass":
@@ -511,7 +553,7 @@ namespace SWatchDesigner
                             apps.Add(new WeatherAltitudeApp(x, y, width, height, panel10));
                             break;
                         default:
-                            Console.WriteLine("Default case");
+                            //Console.WriteLine("Default case");
                             break;
                     }
                     curX = 0; curY = 0; initialX = 0; initialY = 0;
@@ -528,10 +570,10 @@ namespace SWatchDesigner
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            Console.WriteLine("KEY PRESSED: " + e.KeyCode);
+            //Console.WriteLine("KEY PRESSED: " + e.KeyCode);
             if (e.KeyCode == Keys.Z)
             {
-                Console.WriteLine("Z PRESSED");
+                //Console.WriteLine("Z PRESSED");
                 apps.RemoveAt(apps.Count - 1);
                 this.Refresh();
             }
@@ -566,27 +608,39 @@ namespace SWatchDesigner
 
         private void saveLayoutBtn_Click(object sender, EventArgs e)
         {
+            dataRead = true;
             saveLayout(nsTabControl1.SelectedTab.Text);
             unsavedChanges = false;
+            dataRead = false;
         }
 
         private void deleteLayoutBtn_Click(object sender, EventArgs e)
         {
+
             DeleteDialog deleteDialog = new DeleteDialog();
 
             // Show testDialog as a modal dialog and determine if DialogResult = OK.
             if (deleteDialog.ShowDialog(this) == DialogResult.OK)
             {
+                dataRead = true;
                 deleteLayout(nsTabControl1.SelectedTab.Text);
                 nsTabControl1.TabPages.RemoveAt(nsTabControl1.SelectedIndex);
                 //nsTabControl1.DeselectTab(nsTabControl1.SelectedTab.Text);
+                dataRead = false;
                 
             }
             else
             {
-                Console.WriteLine("Cancelled");
+               //Console.WriteLine("Cancelled");
             }
             deleteDialog.Dispose();
         }
+
+        private void nsControlButton1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+
     }
 }
