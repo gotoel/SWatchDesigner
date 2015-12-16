@@ -415,7 +415,7 @@ class NSLabel : Control
 }
 
 [DefaultEvent("TextChanged")]
-class NSTextBox : Control
+public class NSTextBox : Control
 {
 
     private HorizontalAlignment _TextAlign = HorizontalAlignment.Left;
@@ -3422,6 +3422,12 @@ class NSListView : Control
 
         base.OnMouseDown(e);
     }
+    public void ClearSelected()
+    {
+        Focus();
+        _SelectedItems.Clear();
+        Invalidate();
+    }
 
     private Pen P1;
     private Pen P2;
@@ -3526,8 +3532,8 @@ class NSListView : Control
         R1 = new Rectangle(0, 0, Width, ItemHeight);
 
         GB1 = new LinearGradientBrush(R1, Color.FromArgb(60, 60, 60), Color.FromArgb(55, 55, 55), 90f);
-        G.FillRectangle(GB1, R1);
-        G.DrawRectangle(P3, 1, 1, Width - 22, ItemHeight - 2);
+        //G.FillRectangle(GB1, R1);
+        //G.DrawRectangle(P3, 1, 1, Width - 22, ItemHeight - 2);
 
         int LH = Math.Min(VS.Maximum + ItemHeight - Offset, Height);
 
@@ -3544,7 +3550,7 @@ class NSListView : Control
             G.DrawString(CC.Text, Font, Brushes.White, X, Y);
 
             G.DrawLine(P2, X - 3, 0, X - 3, LH);
-            G.DrawLine(P3, X - 2, 0, X - 2, ItemHeight);
+            //G.DrawLine(P3, X - 2, 0, X - 2, ItemHeight);
         }
 
         G.DrawRectangle(P2, 0, 0, Width - 1, Height - 1);

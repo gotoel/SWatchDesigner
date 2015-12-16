@@ -7,12 +7,26 @@ c:\users\gotoel\documents\visual studio 2012\Projects\SWatchDesigner\SWatchDesig
 c:\users\gotoel\documents\visual studio 2012\Projects\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.pdb
 C:\Users\gotoel\documents\visual studio 2012\Projects\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.MainForm.resources
 C:\Users\gotoel\documents\visual studio 2012\Projects\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.csprojResolveAssemblyReference.cache
+E:\CS225 - HCI - Project 2\SWatchDesigner\SWatchDesigner\SWatchDesigner\bin\Debug\SWatchDesigner.exe.config
+E:\CS225 - HCI - Project 2\SWatchDesigner\SWatchDesigner\SWatchDesigner\bin\Debug\SWatchDesigner.exe
+E:\CS225 - HCI - Project 2\SWatchDesigner\SWatchDesigner\SWatchDesigner\bin\Debug\SWatchDesigner.pdb
+E:\CS225 - HCI - Project 2\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.csprojResolveAssemblyReference.cache
+E:\CS225 - HCI - Project 2\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.MainForm.resources
+E:\CS225 - HCI - Project 2\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.Properties.Resources.resources
+E:\CS225 - HCI - Project 2\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.csproj.GenerateResource.Cache
+E:\CS225 - HCI - Project 2\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.exe
+E:\CS225 - HCI - Project 2\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.pdb
+E:\CS225 - HCI - Project 2\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.NewLayoutDialog.resources
 C:\Users\gotoel\Documents\Visual Studio 2012\Projects\SWatchDesigner\SWatchDesigner\SWatchDesigner\bin\Debug\SWatchDesigner.exe.config
-C:\Users\gotoel\Documents\Visual Studio 2012\Projects\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.exe
-C:\Users\gotoel\Documents\Visual Studio 2012\Projects\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.pdb
 C:\Users\gotoel\Documents\Visual Studio 2012\Projects\SWatchDesigner\SWatchDesigner\SWatchDesigner\bin\Debug\SWatchDesigner.exe
 C:\Users\gotoel\Documents\Visual Studio 2012\Projects\SWatchDesigner\SWatchDesigner\SWatchDesigner\bin\Debug\SWatchDesigner.pdb
 C:\Users\gotoel\Documents\Visual Studio 2012\Projects\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.csprojResolveAssemblyReference.cache
+C:\Users\gotoel\Documents\Visual Studio 2012\Projects\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.SaveDialog.resources
 C:\Users\gotoel\Documents\Visual Studio 2012\Projects\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.MainForm.resources
+C:\Users\gotoel\Documents\Visual Studio 2012\Projects\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.DeleteDialog.resources
+C:\Users\gotoel\Documents\Visual Studio 2012\Projects\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.NewLayoutDialog.resources
 C:\Users\gotoel\Documents\Visual Studio 2012\Projects\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.Properties.Resources.resources
+C:\Users\gotoel\Documents\Visual Studio 2012\Projects\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.Splash.resources
 C:\Users\gotoel\Documents\Visual Studio 2012\Projects\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.csproj.GenerateResource.Cache
+C:\Users\gotoel\Documents\Visual Studio 2012\Projects\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.exe
+C:\Users\gotoel\Documents\Visual Studio 2012\Projects\SWatchDesigner\SWatchDesigner\SWatchDesigner\obj\Debug\SWatchDesigner.pdb
